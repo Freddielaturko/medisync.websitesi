@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediSync — Ana Sayfa</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">MediSync</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Ana Sayfa</a></li>
+    <li><a href="hakkimizda.html">Hakkımızda</a></li>
+    <li><a href="fiyatlar.html">Fiyatlar</a></li>
+    <li><a href="randevu.html">Randevu Al</a></li>
+    <li><a href="iletisim.html">İletişim</a></li>
+  </ul>
+  <div class="nav-btns">
+    <button class="btn-ghost" onclick="openModal('giris')">Giriş Yap</button>
+    <button class="btn-primary" onclick="openModal('kayit')">Ücretsiz Başla</button>
+  </div>
+</nav>
+
+
+<div style="display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:48px;padding:72px 64px;max-width:1200px;margin:0 auto;">
+  <div>
+    <div style="display:inline-block;background:#EFF0FE;color:#5c3db0;font-size:12px;font-weight:500;border-radius:20px;padding:4px 14px;margin-bottom:20px;">Türkiye'nin randevu platformu</div>
+    <h1 style="font-size:42px;font-weight:600;line-height:1.2;letter-spacing:-1px;color:#111;margin-bottom:16px;">İşletmenizi <span style="color:#5c3db0;">dijitale taşıyın</span>, randevularınız otomatik yönetilsin</h1>
+    <p style="font-size:17px;color:#666;line-height:1.6;margin-bottom:32px;">Randevularınızı, takvimlerinizi ve müşteri iletişimini tek panelden kolayca yönetin. Teknik bilgi gerekmez.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <button class="btn-hero" onclick="openModal('kayit')">Ücretsiz Deneyin</button>
+      <a href="hakkimizda.html" class="btn-hero-ghost">Daha fazla bilgi</a>
+    </div>
+    <p style="font-size:12px;color:#999;margin-top:12px;">Kredi kartı gerekmez · 2 dakikada kurulum · İstediğiniz zaman iptal</p>
+  </div>
+
+
+  <div style="width:100%;height:420px;background:linear-gradient(135deg,#1a0a3c,#2d1b69,#1a0a3c);border-radius:20px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;">
+    <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:40px 40px;"></div>
+    <div class="anim-dot" style="width:6px;height:6px;top:15%;left:10%;animation-delay:0s;"></div>
+    <div class="anim-dot" style="width:4px;height:4px;top:30%;left:80%;animation-delay:0.8s;"></div>
+    <div class="anim-dot" style="width:5px;height:5px;top:70%;left:20%;animation-delay:1.4s;"></div>
+    <div class="anim-dot" style="width:3px;height:3px;top:55%;left:65%;animation-delay:0.4s;"></div>
+    <div class="anim-dot" style="width:6px;height:6px;top:80%;left:85%;animation-delay:1.8s;"></div>
+    <div style="position:relative;z-index:2;text-align:center;padding:24px;">
+      <div style="display:flex;align-items:flex-end;justify-content:center;gap:8px;margin-bottom:20px;">
+        <div style="width:28px;height:60px;background:#7c5cbf;border-radius:4px 4px 0 0;"></div>
+        <div style="width:22px;height:45px;background:#9b7dd4;border-radius:4px 4px 0 0;"></div>
+        <div style="width:36px;height:80px;background:#5c3db0;border-radius:4px 4px 0 0;"></div>
+        <div style="width:24px;height:50px;background:#8a6bc8;border-radius:4px 4px 0 0;"></div>
+        <div style="width:30px;height:65px;background:#6b49bb;border-radius:4px 4px 0 0;"></div>
+      </div>
+      <svg width="260" height="90" viewBox="0 0 260 90" style="display:block;margin:0 auto 16px;">
+        <line x1="30" y1="45" x2="130" y2="20" stroke="rgba(167,139,250,0.4)" stroke-width="1.5" stroke-dasharray="4 3"><animate attributeName="stroke-dashoffset" from="0" to="-14" dur="1.5s" repeatCount="indefinite"/></line>
+        <line x1="230" y1="45" x2="130" y2="20" stroke="rgba(167,139,250,0.4)" stroke-width="1.5" stroke-dasharray="4 3"><animate attributeName="stroke-dashoffset" from="0" to="-14" dur="1.8s" repeatCount="indefinite"/></line>
+        <line x1="30" y1="45" x2="130" y2="70" stroke="rgba(167,139,250,0.3)" stroke-width="1.5" stroke-dasharray="4 3"><animate attributeName="stroke-dashoffset" from="0" to="-14" dur="2s" repeatCount="indefinite"/></line>
+        <line x1="230" y1="45" x2="130" y2="70" stroke="rgba(167,139,250,0.3)" stroke-width="1.5" stroke-dasharray="4 3"><animate attributeName="stroke-dashoffset" from="0" to="-14" dur="1.3s" repeatCount="indefinite"/></line>
+        <circle cx="30" cy="45" r="8" fill="#7c5cbf"><animate attributeName="r" values="7;9;7" dur="2s" repeatCount="indefinite"/></circle>
+        <circle cx="230" cy="45" r="8" fill="#9b7dd4"><animate attributeName="r" values="7;9;7" dur="2.4s" repeatCount="indefinite"/></circle>
+        <circle cx="130" cy="20" r="8" fill="#5c3db0"><animate attributeName="r" values="7;10;7" dur="1.8s" repeatCount="indefinite"/></circle>
+        <circle cx="130" cy="70" r="8" fill="#8a6bc8"><animate attributeName="r" values="7;9;7" dur="2.2s" repeatCount="indefinite"/></circle>
+        <circle cx="130" cy="45" r="14" fill="#5c3db0"><animate attributeName="r" values="13;16;13" dur="1.5s" repeatCount="indefinite"/></circle>
+        <text x="130" y="50" text-anchor="middle" fill="white" font-size="12">📅</text>
+      </svg>
+      <div style="display:flex;gap:12px;justify-content:center;">
+        <div class="anim-metric" style="animation-delay:0s;"><div style="font-size:18px;font-weight:700;color:#a78bfa;">150K+</div><div style="font-size:10px;color:rgba(255,255,255,0.6);">Randevu</div></div>
+        <div class="anim-metric" style="animation-delay:0.3s;"><div style="font-size:18px;font-weight:700;color:#c4b5f4;">2K+</div><div style="font-size:10px;color:rgba(255,255,255,0.6);">İşletme</div></div>
+        <div class="anim-metric" style="animation-delay:0.6s;"><div style="font-size:18px;font-weight:700;color:#a78bfa;">%98</div><div style="font-size:10px;color:rgba(255,255,255,0.6);">Memnuniyet</div></div>
+      </div>
+      <div style="margin-top:20px;background:rgba(255,255,255,0.08);border-radius:8px;height:6px;width:180px;margin-left:auto;margin-right:auto;overflow:hidden;">
+        <div style="height:100%;background:linear-gradient(90deg,#7c5cbf,#a78bfa);border-radius:8px;animation:progressBar 3s ease-in-out infinite;"></div>
+      </div>
+      <div style="margin-top:8px;font-size:11px;color:rgba(255,255,255,0.5);">Sistemler senkronize ediliyor...</div>
+    </div>
+  </div>
+</div>
+
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">150K+</div><div class="stat-label">Yönetilen randevu</div></div>
+  <div class="stat"><div class="stat-num">2.000+</div><div class="stat-label">Aktif işletme</div></div>
+  <div class="stat"><div class="stat-num">%98</div><div class="stat-label">Memnuniyet oranı</div></div>
+  <div class="stat"><div class="stat-num">7/24</div><div class="stat-label">Canlı destek</div></div>
+</div>
+
+
+<section class="section" id="ozellikler">
+  <div class="section-label">Özellikler</div>
+  <div class="section-title">Her şey tek platformda</div>
+  <div class="section-desc">Randevudan ödemeye, SMS'ten raporlamaya kadar tüm ihtiyaçlarınız burada.</div>
+  <div class="features-grid">
+    <div class="feature-card"><img src="https://picsum.photos/seed/calendar/600/160" alt="Takvim"/><div class="feature-card-body"><div class="feature-icon">📅</div><h3>Akıllı takvim</h3><p>Uygun saatleri otomatik tespit edin, çakışmaları önleyin.</p></div></div>
+    <div class="feature-card"><img src="https://picsum.photos/seed/phone/600/160" alt="SMS"/><div class="feature-card-body"><div class="feature-icon">📱</div><h3>SMS & WhatsApp</h3><p>Randevu öncesi otomatik hatırlatma gönderin, iptalleri azaltın.</p></div></div>
+    <div class="feature-card"><img src="https://picsum.photos/seed/online/600/160" alt="Online"/><div class="feature-card-body"><div class="feature-icon">🌐</div><h3>Online randevu</h3><p>Müşterileriniz kendi saatlerini kendileri seçsin.</p></div></div>
+    <div class="feature-card"><img src="https://picsum.photos/seed/payment/600/160" alt="Ödeme"/><div class="feature-card-body"><div class="feature-icon">💳</div><h3>Tahsilat takibi</h3><p>Ödemeleri kayıt altına alın, gelir raporlarına ulaşın.</p></div></div>
+    <div class="feature-card"><img src="https://picsum.photos/seed/stats/600/160" alt="İstatistik"/><div class="feature-card-body"><div class="feature-icon">📊</div><h3>İstatistik & raporlar</h3><p>Doluluk oranı ve gelir trendini takip edin.</p></div></div>
+    <div class="feature-card"><img src="https://picsum.photos/seed/review/600/160" alt="Yorum"/><div class="feature-card-body"><div class="feature-icon">⭐</div><h3>Google yorum talebi</h3><p>Otomatik yorum talebi gönderin, itibarınızı güçlendirin.</p></div></div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="section-label">Nasıl çalışır?</div>
+  <div class="section-title">3 adımda başlayın</div>
+  <div class="how-grid">
+      <div class="step"><div class="step-num">1</div><div class="step-text"><h3>Hesap oluşturun</h3><p>2 dakikada ücretsiz hesabınızı açın.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><h3>İşletmenizi kurun</h3><p>Hizmet, personel ve çalışma saatlerinizi ekleyin.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><h3>Randevuları yönetin</h3><p>Müşteriler online randevu alsın, siz işinize odaklanın.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">Sektörler</div>
+  <div class="section-title">Her sektöre uygun çözüm</div>
+  <div class="sector-tags">
+    <div class="sector-tag active">Tümü</div>
+    <div class="sector-tag">🩺 Fizyoterapi</div>
+    <div class="sector-tag">🧠 Psikolog</div>
+    <div class="sector-tag">💅 Güzellik salonu</div>
+    <div class="sector-tag">🧘 Pilates</div>
+    <div class="sector-tag">🐶 Veteriner</div>
+    <div class="sector-tag">🦷 Diş kliniği</div>
+    <div class="sector-tag">🥗 Diyetisyen</div>
+    <div class="sector-tag">✂️ Kuaför</div>
+  </div>
+</section>
+
+<div class="showcase">
+  <div class="showcase-grid">
+    <div class="showcase-img"><img src="https://picsum.photos/seed/clinic2/600/220" alt="Klinik"/></div>
+    <div class="showcase-img"><img src="https://picsum.photos/seed/beauty/600/220" alt="Güzellik"/></div>
+    <div class="showcase-img"><img src="https://picsum.photos/seed/sport/600/220" alt="Spor"/></div>
+  </div>
+</div>
+
+<section class="testimonials">
+  <div class="section-label">Kullanıcı görüşleri</div>
+  <div class="section-title">Gerçek işletmeler, gerçek sonuçlar</div>
+  <div class="testimonial-grid">
+    <div class="testimonial"><p>"Randevularım ilk kez bu kadar düzenli akıyor. İptaller neredeyse sıfıra indi."</p><div class="testimonial-author"><div class="avatar">AG</div><div class="author-info"><div class="author-name">Fzt. Ali Gökberk</div><div class="author-role">Fizyoterapi kliniği</div></div></div></div>
+    <div class="testimonial"><p>"Danışanlar artık saatlerini kendileri seçiyor. Hem iş yüküm azaldı hem bağlılık arttı."</p><div class="testimonial-author"><div class="avatar">ŞA</div><div class="author-info"><div class="author-name">Şeyma Ayak</div><div class="author-role">Psikolojik danışman</div></div></div></div>
+    <div class="testimonial"><p>"WhatsApp entegrasyonu mükemmel. Kendi hattımdan otomatik mesaj gönderiyorum."</p><div class="testimonial-author"><div class="avatar">ME</div><div class="author-info"><div class="author-name">Merve Eren</div><div class="author-role">Güzellik salonu</div></div></div></div>
+    <div class="testimonial"><p>"Kurulumu 2 dakika sürdü. Teknik bilgim olmadan her şeyi yönetebildim."</p><div class="testimonial-author"><div class="avatar">KD</div><div class="author-info"><div class="author-name">Kemal Doğan</div><div class="author-role">Veteriner kliniği</div></div></div></div>
+  </div>
+</section>
+
+<section class="cta">
+  <img class="cta-bg" src="https://picsum.photos/seed/business/1400/500" alt="Arkaplan"/>
+  <div class="cta-content">
+    <h2>Risk yok, randevular çok.</h2>
+    <p>Bugün ücretsiz başlayın.</p>
+    <button class="btn-cta" onclick="openModal('kayit')">Hemen Ücretsiz Başla</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><a href="index.html" class="logo">MediSync</a><p>Randevu bazlı çalışan tüm işletmelere eksiksiz dijital çözümler sunuyoruz.</p></div>
+    <div class="footer-col"><h4>Sayfalar</h4><ul><li><a href="index.html">Ana Sayfa</a></li><li><a href="hakkimizda.html">Hakkımızda</a></li><li><a href="fiyatlar.html">Fiyatlar</a></li><li><a href="iletisim.html">İletişim</a></li></ul></div>
+    <div class="footer-col"><h4>Sektörler</h4><ul><li><a href="#">Psikolog</a></li><li><a href="#">Fizyoterapi</a></li><li><a href="#">Güzellik</a></li><li><a href="#">Veteriner</a></li></ul></div>
+    <div class="footer-col"><h4>Hesap</h4><ul><li><a href="#" onclick="openModal('giris');return false;">Giriş Yap</a></li><li><a href="#" onclick="openModal('kayit');return false;">Ücretsiz Kaydol</a></li><li><a href="iletisim.html">İletişim</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">© 2025 MediSync — Tüm hakları saklıdır.</div>
+</footer>
+
+<div class="music-player">
+  <button class="music-btn" id="musicBtn" onclick="toggleMusic()">▶</button>
+  <div class="music-info"><div class="music-title">Hoş Geldiniz</div><div class="music-sub">Arka plan müziği</div></div>
+  <div class="music-wave paused" id="musicWave"><span></span><span></span><span></span></div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div id="panelGiris">
+      <h2>Tekrar hoş geldiniz 👋</h2>
+      <p class="modal-sub">Hesabınıza giriş yapın</p>
+      <div class="modal-form">
+        <input id="girisEmail" type="email" placeholder="E-posta adresiniz"/>
+        <input id="girisSifre" type="password" placeholder="Şifreniz"/>
+        <div id="girisHata" style="color:#ef4444;font-size:13px;min-height:18px;"></div>
+        <button id="girisBtn" class="modal-submit">Giriş Yap</button>
+      </div>
+      <div class="modal-switch">Hesabınız yok mu? <a onclick="switchPanel('kayit')">Ücretsiz kaydolun</a></div>
+    </div>
+    <div id="panelKayit" style="display:none;">
+      <h2>Ücretsiz başlayın 🚀</h2>
+      <p class="modal-sub">Kredi kartı gerekmez</p>
+      <div class="modal-form">
+        <input id="kayitAd" type="text" placeholder="Adınız Soyadınız"/>
+        <input id="kayitEmail" type="email" placeholder="E-posta adresiniz"/>
+        <input id="kayitSifre" type="password" placeholder="Şifre oluşturun (min. 6 karakter)"/>
+        <div id="kayitHata" style="color:#ef4444;font-size:13px;min-height:18px;"></div>
+        <button id="kayitBtn" class="modal-submit">Hesap Oluştur</button>
+      </div>
+      <div class="modal-switch">Zaten hesabınız var mı? <a onclick="switchPanel('giris')">Giriş yapın</a></div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

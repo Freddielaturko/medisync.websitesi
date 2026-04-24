@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediSync — Fiyatlar</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">MediSync</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Ana Sayfa</a></li>
+    <li><a href="hakkimizda.html">Hakkımızda</a></li>
+    <li><a href="fiyatlar.html" class="active">Fiyatlar</a></li>
+    <li><a href="randevu.html">Randevu Al</a></li>
+    <li><a href="iletisim.html">İletişim</a></li>
+  </ul>
+  <div class="nav-btns">
+    <button class="btn-ghost" onclick="openModal('giris')">Giriş Yap</button>
+    <button class="btn-primary" onclick="openModal('kayit')">Ücretsiz Başla</button>
+  </div>
+</nav>
+
+
+<div class="page-hero">
+  <h1>Fiyatlandırma</h1>
+  <p>İşletmenize uygun planı seçin. Tüm planlar ücretsiz deneme ile başlar, istediğiniz zaman iptal edebilirsiniz.</p>
+</div>
+
+
+<section class="pricing">
+  <div class="section-label">Planlar</div>
+  <div class="section-title">İşletmenize uygun plan seçin</div>
+  <div class="section-desc">Kredi kartı gerekmez. İstediğiniz zaman yükseltip düşürebilirsiniz.</div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-tier">Giriş</div>
+      <div class="price-amount">Ücretsiz <span>/ aylık</span></div>
+      <div class="price-desc">Dijitale geçmek isteyenler için ideal başlangıç noktası.</div>
+      <button class="price-btn" onclick="openModal('kayit')">Hemen Başla</button>
+      <ul class="price-features">
+        <li>1 kullanıcı</li>
+        <li>Temel takvim</li>
+        <li>Online randevu sayfası</li>
+        <li>E-posta bildirimleri</li>
+        <li>Müşteri kayıtları</li>
+      </ul>
+    </div>
+    <div class="price-card popular">
+      <div class="popular-badge">En popüler</div>
+      <div class="price-tier">Profesyonel</div>
+      <div class="price-amount">₺499 <span>/ aylık</span></div>
+      <div class="price-desc">Büyüyen işletmeler için otomasyon ve raporlama araçları.</div>
+      <button class="price-btn" onclick="openModal('kayit')">Ücretsiz Dene</button>
+      <ul class="price-features">
+        <li>5 kullanıcıya kadar</li>
+        <li>SMS & WhatsApp hatırlatma</li>
+        <li>Gelir raporları</li>
+        <li>Google yorum talebi</li>
+        <li>Tahsilat takibi</li>
+        <li>Online görüşme entegrasyonu</li>
+      </ul>
+    </div>
+    <div class="price-card">
+      <div class="price-tier">Kurumsal</div>
+      <div class="price-amount">₺999 <span>/ aylık</span></div>
+      <div class="price-desc">Yüksek trafik ve çok şubeli işletmeler için tam güç.</div>
+      <button class="price-btn" onclick="openModal('kayit')">Bize Ulaşın</button>
+      <ul class="price-features">
+        <li>Sınırsız kullanıcı</li>
+        <li>Çok şube desteği</li>
+        <li>API entegrasyonu</li>
+        <li>Özel onboarding</li>
+        <li>Öncelikli destek</li>
+        <li>Özel raporlama</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" style="background:#fafafa;">
+  <div class="section-label">Karşılaştırma</div>
+  <div class="section-title">Hangi plan size uygun?</div>
+  <div style="overflow-x:auto;margin-top:32px;">
+    <table style="width:100%;border-collapse:collapse;font-size:14px;">
+      <thead>
+        <tr style="background:#5c3db0;color:#fff;">
+          <th style="padding:14px 20px;text-align:left;border-radius:10px 0 0 0;">Özellik</th>
+          <th style="padding:14px 20px;text-align:center;">Giriş</th>
+          <th style="padding:14px 20px;text-align:center;">Profesyonel</th>
+          <th style="padding:14px 20px;text-align:center;border-radius:0 10px 0 0;">Kurumsal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:#fff;">
+          <td style="padding:12px 20px;border-bottom:0.5px solid #f0f0f0;">Kullanıcı sayısı</td>
+          <td style="padding:12px 20px;text-align:center;border-bottom:0.5px solid #f0f0f0;">1</td>
+          <td style="padding:12px 20px;text-align:center;border-bottom:0.5px solid #f0f0f0;">5'e kadar</td>
+          <td style="padding:12px 20px;text-align:center;border-bottom:0.5px solid #f0f0f0;">Sınırsız</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="padding:12px 20px;border-bottom:0.5px solid #f0f0f0;">Online randevu</td>
+          <td style="padding:12px 20px;text-align:center;border-bottom:0.5px solid #f0f0f0;">✓</td>
+          <td style="padding:12px 20px;text-align:center;border-bottom:0.5px solid #f0f0f0;">✓</td>
+          <td style="padding:12px 20px;text-align:center;border-bottom:0.5px solid #f0f0f0;">✓</td>
+        </tr>
+        <tr style="background:#fff;">
+          <td style="padding:12px 20px;border-bottom:0.5px solid #f0f0f0;">SMS hatırlatma</td>
+          <td style="padding:12px 20px;text-align:center;border-bottom:0.5px solid #f0f0f0;">—</td>
+          <td style="padding:12px 20px;text-align:center;border-bottom:0.5px solid #f0f0f0;">✓</td>
+          <td style="padding:12px 20px;text-align:center;border-bottom:0.5px solid #f0f0f0;">✓</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="padding:12px 20px;border-bottom:0.5px solid #f0f0f0;">Gelir raporları</td>
+          <td style="padding:12px 20px;text-align:center;border-bottom:0.5px solid #f0f0f0;">—</td>
+          <td style="padding:12px 20px;text-align:center;border-bottom:0.5px solid #f0f0f0;">✓</td>
+          <td style="padding:12px 20px;text-align:center;border-bottom:0.5px solid #f0f0f0;">✓</td>
+        </tr>
+        <tr style="background:#fff;">
+          <td style="padding:12px 20px;border-bottom:0.5px solid #f0f0f0;">Çok şube</td>
+          <td style="padding:12px 20px;text-align:center;border-bottom:0.5px solid #f0f0f0;">—</td>
+          <td style="padding:12px 20px;text-align:center;border-bottom:0.5px solid #f0f0f0;">—</td>
+          <td style="padding:12px 20px;text-align:center;border-bottom:0.5px solid #f0f0f0;">✓</td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="padding:12px 20px;">API erişimi</td>
+          <td style="padding:12px 20px;text-align:center;">—</td>
+          <td style="padding:12px 20px;text-align:center;">—</td>
+          <td style="padding:12px 20px;text-align:center;">✓</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<section class="faq">
+  <div class="section-label">Sık sorulan sorular</div>
+  <div class="section-title">Fiyatlandırma hakkında</div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-question">Ücretsiz plan sonsuza kadar ücretsiz mi? <span class="faq-arrow">▾</span></div>
+      <div class="faq-answer">Evet. Giriş planı süresiz olarak ücretsizdir. İstediğiniz zaman ücretli plana geçiş yapabilirsiniz.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">İstediğim zaman iptal edebilir miyim? <span class="faq-arrow">▾</span></div>
+      <div class="faq-answer">Evet, herhangi bir zamanda iptal edebilirsiniz. Uzun vadeli taahhüt veya ceza yoktur.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Plan değiştirmek ücretli mi? <span class="faq-arrow">▾</span></div>
+      <div class="faq-answer">Hayır. Planlar arasında istediğiniz zaman ücretsiz geçiş yapabilirsiniz.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Fatura nasıl kesiliyor? <span class="faq-arrow">▾</span></div>
+      <div class="faq-answer">Aylık veya yıllık (indirimli) ödeme seçenekleri mevcuttur. Kredi kartı veya havale ile ödeme yapabilirsiniz.</div>
+    </div>
+  </div>
+</section>
+
+
+<section class="cta">
+  <img class="cta-bg" src="https://picsum.photos/seed/business/1400/500" alt="Arkaplan"/>
+  <div class="cta-content">
+    <h2>Bugün ücretsiz başlayın.</h2>
+    <p>Kredi kartı gerekmez. 2 dakikada hesabınızı oluşturun.</p>
+    <button class="btn-cta" onclick="openModal('kayit')">Hemen Ücretsiz Başla</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><a href="index.html" class="logo">MediSync</a><p>Randevu bazlı çalışan tüm işletmelere eksiksiz dijital çözümler sunuyoruz.</p></div>
+    <div class="footer-col"><h4>Sayfalar</h4><ul><li><a href="index.html">Ana Sayfa</a></li><li><a href="hakkimizda.html">Hakkımızda</a></li><li><a href="fiyatlar.html">Fiyatlar</a></li><li><a href="iletisim.html">İletişim</a></li></ul></div>
+    <div class="footer-col"><h4>Sektörler</h4><ul><li><a href="#">Psikolog</a></li><li><a href="#">Fizyoterapi</a></li><li><a href="#">Güzellik</a></li><li><a href="#">Veteriner</a></li></ul></div>
+    <div class="footer-col"><h4>Hesap</h4><ul><li><a href="#" onclick="openModal('giris');return false;">Giriş Yap</a></li><li><a href="#" onclick="openModal('kayit');return false;">Ücretsiz Kaydol</a></li><li><a href="iletisim.html">İletişim</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">© 2025 MediSync — Tüm hakları saklıdır.</div>
+</footer>
+
+
+<div class="music-player">
+  <button class="music-btn" id="musicBtn" onclick="toggleMusic()">▶</button>
+  <div class="music-info"><div class="music-title">Hoş Geldiniz</div><div class="music-sub">Arka plan müziği</div></div>
+  <div class="music-wave paused" id="musicWave"><span></span><span></span><span></span></div>
+</div>
+
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div id="panelGiris">
+      <h2>Tekrar hoş geldiniz 👋</h2>
+      <p class="modal-sub">Hesabınıza giriş yapın</p>
+      <div class="modal-form">
+        <input id="girisEmail" type="email" placeholder="E-posta adresiniz"/>
+        <input id="girisSifre" type="password" placeholder="Şifreniz"/>
+        <div id="girisHata" style="color:#ef4444;font-size:13px;min-height:18px;"></div>
+        <button id="girisBtn" class="modal-submit">Giriş Yap</button>
+      </div>
+      <div class="modal-switch">Hesabınız yok mu? <a onclick="switchPanel('kayit')">Ücretsiz kaydolun</a></div>
+    </div>
+    <div id="panelKayit" style="display:none;">
+      <h2>Ücretsiz başlayın 🚀</h2>
+      <p class="modal-sub">Kredi kartı gerekmez</p>
+      <div class="modal-form">
+        <input id="kayitAd" type="text" placeholder="Adınız Soyadınız"/>
+        <input id="kayitEmail" type="email" placeholder="E-posta adresiniz"/>
+        <input id="kayitSifre" type="password" placeholder="Şifre oluşturun (min. 6 karakter)"/>
+        <div id="kayitHata" style="color:#ef4444;font-size:13px;min-height:18px;"></div>
+        <button id="kayitBtn" class="modal-submit">Hesap Oluştur</button>
+      </div>
+      <div class="modal-switch">Zaten hesabınız var mı? <a onclick="switchPanel('giris')">Giriş yapın</a></div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

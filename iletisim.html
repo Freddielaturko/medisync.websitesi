@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediSync — İletişim</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">MediSync</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Ana Sayfa</a></li>
+    <li><a href="hakkimizda.html">Hakkımızda</a></li>
+    <li><a href="fiyatlar.html">Fiyatlar</a></li>
+    <li><a href="randevu.html">Randevu Al</a></li>
+    <li><a href="iletisim.html" class="active">İletişim</a></li>
+  </ul>
+  <div class="nav-btns">
+    <button class="btn-ghost" onclick="openModal('giris')">Giriş Yap</button>
+    <button class="btn-primary" onclick="openModal('kayit')">Ücretsiz Başla</button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <h1>İletişim</h1>
+  <p>Sorularınız için bize ulaşın. Ekibimiz en kısa sürede size dönecektir.</p>
+</div>
+
+<section class="section contact-section">
+  <div class="section-label">Bize yazın</div>
+  <div class="section-title">Nasıl yardımcı olabiliriz?</div>
+  <div class="contact-grid">
+    <div>
+      <div class="contact-form">
+        <input type="text" placeholder="Adınız Soyadınız"/>
+        <input type="email" placeholder="E-posta adresiniz"/>
+        <input type="text" placeholder="Konu"/>
+        <textarea placeholder="Mesajınızı buraya yazın..."></textarea>
+        <button class="btn-submit">Mesaj Gönder</button>
+      </div>
+    </div>
+
+    <div class="contact-info">
+      <div class="contact-info-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <h4>Adres</h4>
+          <p>Kuşcağız Mahallesi 340. cad 5/8<br>Keçiören / Ankara</p>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <h4>Telefon</h4>
+          <p>+90 542 122 0614<br>Pazartesi–Cuma, 09:00–18:00</p>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <h4>E-posta</h4>
+          <p>destek@medisync.com<br>En geç 24 saatte yanıt</p>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon">💬</div>
+        <div>
+          <h4>Canlı destek</h4>
+          <p>7/24 canlı sohbet desteği için sağ alttaki butonu kullanabilirsiniz.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="padding: 0 48px 72px;">
+  <img src="https://picsum.photos/seed/map/1200/320" alt="Harita" style="width:100%;height:320px;object-fit:cover;border-radius:16px;display:block;"/>
+</div>
+
+<section class="faq" style="background:#f8f6ff;">
+  <div class="section-label">Sık sorulan sorular</div>
+  <div class="section-title">Hızlı cevaplar</div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-question">Destek hangi saatlerde aktif? <span class="faq-arrow">▾</span></div>
+      <div class="faq-answer">Canlı sohbet desteğimiz 7/24 aktiftir. Telefon desteğimiz hafta içi 09:00–18:00 saatleri arasında hizmet vermektedir.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Demo talep edebilir miyim? <span class="faq-arrow">▾</span></div>
+      <div class="faq-answer">Evet! Yukarıdaki formu doldurun veya bizi arayın. Ekibimiz size özel bir demo randevusu ayarlayacaktır.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Teknik destek için ne yapmalıyım? <span class="faq-arrow">▾</span></div>
+      <div class="faq-answer">destek@medisync.com adresine e-posta gönderin veya canlı sohbet üzerinden bize ulaşın. Ortalama yanıt süremiz 2 saattir.</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <img class="cta-bg" src="https://picsum.photos/seed/business/1400/500" alt="Arkaplan"/>
+  <div class="cta-content">
+    <h2>Hâlâ kararsız mısınız?</h2>
+    <p>Ücretsiz deneyin, fark yaratıp yaratmadığını kendiniz görün.</p>
+    <button class="btn-cta" onclick="openModal('kayit')">Hemen Ücretsiz Başla</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><a href="index.html" class="logo">MediSync</a><p>Randevu bazlı çalışan tüm işletmelere eksiksiz dijital çözümler sunuyoruz.</p></div>
+    <div class="footer-col"><h4>Sayfalar</h4><ul><li><a href="index.html">Ana Sayfa</a></li><li><a href="hakkimizda.html">Hakkımızda</a></li><li><a href="fiyatlar.html">Fiyatlar</a></li><li><a href="iletisim.html">İletişim</a></li></ul></div>
+    <div class="footer-col"><h4>Sektörler</h4><ul><li><a href="#">Psikolog</a></li><li><a href="#">Fizyoterapi</a></li><li><a href="#">Güzellik</a></li><li><a href="#">Veteriner</a></li></ul></div>
+    <div class="footer-col"><h4>Hesap</h4><ul><li><a href="#" onclick="openModal('giris');return false;">Giriş Yap</a></li><li><a href="#" onclick="openModal('kayit');return false;">Ücretsiz Kaydol</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">© 2025 MediSync — Tüm hakları saklıdır.</div>
+</footer>
+
+<div class="music-player">
+  <button class="music-btn" id="musicBtn" onclick="toggleMusic()">▶</button>
+  <div class="music-info"><div class="music-title">Hoş Geldiniz</div><div class="music-sub">Arka plan müziği</div></div>
+  <div class="music-wave paused" id="musicWave"><span></span><span></span><span></span></div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div id="panelGiris">
+      <h2>Tekrar hoş geldiniz 👋</h2>
+      <p class="modal-sub">Hesabınıza giriş yapın</p>
+      <div class="modal-form">
+        <input id="girisEmail" type="email" placeholder="E-posta adresiniz"/>
+        <input id="girisSifre" type="password" placeholder="Şifreniz"/>
+        <div id="girisHata" style="color:#ef4444;font-size:13px;min-height:18px;"></div>
+        <button id="girisBtn" class="modal-submit">Giriş Yap</button>
+      </div>
+      <div class="modal-switch">Hesabınız yok mu? <a onclick="switchPanel('kayit')">Ücretsiz kaydolun</a></div>
+    </div>
+    <div id="panelKayit" style="display:none;">
+      <h2>Ücretsiz başlayın 🚀</h2>
+      <p class="modal-sub">Kredi kartı gerekmez</p>
+      <div class="modal-form">
+        <input id="kayitAd" type="text" placeholder="Adınız Soyadınız"/>
+        <input id="kayitEmail" type="email" placeholder="E-posta adresiniz"/>
+        <input id="kayitSifre" type="password" placeholder="Şifre oluşturun (min. 6 karakter)"/>
+        <div id="kayitHata" style="color:#ef4444;font-size:13px;min-height:18px;"></div>
+        <button id="kayitBtn" class="modal-submit">Hesap Oluştur</button>
+      </div>
+      <div class="modal-switch">Zaten hesabınız var mı? <a onclick="switchPanel('giris')">Giriş yapın</a></div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+HTML her sayfanın iskeletini oluşturdu. 4 ayrı sayfa yaptık ve her birinin kendine özel içeriği var.
+
+index.html — Ana Sayfa:
+Hero bölümü: Sol tarafta yazı, sağ tarafta CSS animasyonu. İki kolonlu yapı display:grid ile kuruldu.
+Stats şeridi: 4 rakamlı kutular.
+Özellikler: 6 kartlık grid, her kartta fotoğraf + ikon + açıklama.
+Nasıl çalışır: Sol tarafta YouTube <iframe>, sağ tarafta 3 adım.
+Sektörler: Tıklanabilir etiketler.
+Görsel bant: 3 fotoğraflı showcase.
+Testimoniallar: 4 kullanıcı yorumu.
+CTA: Arka planlı çağrı bölümü.
+
+hakkimizda.html:
+<div class="page-hero"> — Mor arka planlı sayfa başlığı.
+6 kartlık özellikler griди — Misyon, vizyon, ekip, kuruluş, müşteri odaklılık, güvenlik.
+Rakamlar bölümü: 4 büyük istatistik kutusu.
+2 testimonial kart.
+
+fiyatlar.html:
+3 fiyat kartı — Giriş (ücretsiz), Profesyonel, Kurumsal. Ortadaki "En popüler" rozeti position: absolute ile kartın üstüne konumlandırıldı.
+<table> — Planları karşılaştıran tablo. ✓ ve — işaretleriyle özellik karşılaştırması.
+SSS accordion — 4 soru/cevap.
+
+iletisim.html:
+İletişim formu: Ad, e-posta, konu, mesaj alanları ve <textarea>.
+İletişim bilgileri: Adres, telefon, e-posta, canlı destek kartları.
+Temsili harita görseli.
+3 soruluk SSS.
+Sayfalar arası geçiş <a href="fiyatlar.html"> gibi normal bağlantılarla sağlandı — her link gerçek bir sayfaya gidiyor.
+
+CSS artık tek bir style.css dosyasında toplandı ve tüm sayfalar <link rel="stylesheet" href="style.css"> ile bu dosyayı çekti. Yani bir rengi değiştirince 4 sayfada birden değişiyor.
+Renk sistemi:
+Ana mor #5c3db0, hover moru #4a2f95, açık mor arka plan #EFF0FE ve #f8f6ff. Tüm sitede tutarlı.
+Layout — Grid kullanımı:
+
+grid-template-columns: repeat(3, 1fr) — Özellikler, hakkımızda ve fiyat kartları 3 kolonlu.
+grid-template-columns: 1fr 1fr — Hero bölümü ve nasıl çalışır bölümü 2 kolonlu.
+grid-template-columns: 2fr 1fr 1fr 1fr — Footer 4 kolonlu ama ilk kolon daha geniş.
+grid-template-columns: 1fr 1fr — İletişim sayfasında form ve bilgiler yan yana.
+
+Layout — Flex kullanımı:
+
+Navbar, stats şeridi, buton grupları, testimonial yazar satırı, sektör etiketleri, adım satırları hep display: flex ile yatay hizalandı.
+
+Pozisyonlama:
+
+position: sticky — Navbar sayfa kaydırılırken üstte sabit kaldı.
+position: fixed — Müzik çalar ve modal overlay her zaman ekranda göründü.
+position: absolute — "En popüler" rozeti fiyat kartının tam üst ortasına yerleşti. top: -12px; left: 50%; transform: translateX(-50%) ile tam ortalandı.
+CTA bölümünde arka plan görseli position: absolute; inset: 0 ile tam kapladı, içerik position: relative; z-index: 1 ile görselin üstünde kaldı.
+
+Sayfa başlığı (page-hero):
+İç sayfalarda (hakkımızda, fiyatlar, iletişim) mor gradyan arka planlı başlık bölümü. Ana sayfadan farklı olarak bu sayfalarda hero bölümü daha sade ve kompakt.
+
+Animasyonlar:
+@keyframes floatDot — Hero animasyonundaki mor noktalar yukarı aşağı süzülüyor.
+@keyframes progressBar — Alt ilerleme çubuğu dolup boşalıyor.
+@keyframes wave — Müzik çalardaki ses dalgası titreşiyor.
+SVG içinde <animate> — Ağ bağlantı çizgileri akan efektle hareket ediyor, düğümler nefes alır gibi büyüyüp küçülüyor.
+
+Responsive:
+@media (max-width: 768px) — Ekran küçülünce nav linkleri gizlendi, 3 kolonlu gridler 1 kolona düştü, iletişim sayfasındaki 2 kolonlu yapı alt alta geldi, padding'ler küçüldü.
+
+JS de tek bir script.js dosyasına taşındı. Her sayfa <script src="script.js"></script> ile çekiyor. Tüm fonksiyonlar DOMContentLoaded içinde başlatıldı — yani HTML tam yüklenmeden JS çalışmıyor, hata olmuyor.
+Overlay'e tıklayınca ve ESC tuşuna basınca da kapanıyor. Her 4 sayfada da aynı fonksiyonlar çalışıyor.
+2. Sektör etiketleri:
+Tıklanan etiketten önce hepsinden active kaldırılıp sadece tıklanana ekleniyor. Bu mor renk geçişini sağlıyor.
+3. SSS Accordion:
+Her soruya tıklanınca open class'ı ekleniyor. CSS bunu yakalayıp cevabı gösteriyor ve oku 180° döndürüyor. Aynı anda başka bir açık soru varsa kapatılıyor.
+4. Buton ses efekti:
+Tüm butonlara click event listener eklendi. Her tıklamada Web Audio API ile OscillatorNode oluşturuluyor, 880Hz'de kısa "tık" sesi üretiliyor ve hızla söndürülüyor. Müzik butonuna tıklayınca ses çıkmıyor (kendi toggle'ı var).
+5. Müzik çalar:
+createMusicBuffer() fonksiyonu Do-Re-Mi-Sol notalarını sinüs dalgalarıyla matematiksel olarak hesaplayıp ses tamponu oluşturuyor. toggleMusic() fonksiyonu play/pause durumunu yönetiyor, kaldığı yerden devam ediyor. window.toggleMusic olarak tanımlandı çünkü HTML'den onclick="toggleMusic()" ile çağırılıyor.
+
+
+LocalStorage
+localstorage ile sahte veri tabanı kurduk. Veriler tarayıcının kendi hafızasına kaydediliyor. Sunucu geretirmiyor ama veriler sadece o tarayıcıda kalıyor. ( Başlangıç aşaması için uygun olduğu öngörülmüştür.)

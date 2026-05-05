@@ -2,49 +2,50 @@
 // AUTH SİSTEMİ — localStorage
 // ========================================
 
-// Kullanıcıları localStorage'dan getir
 function getUsers() {
   return JSON.parse(localStorage.getItem('medisync_users') || '[]');
 }
 
-// Kullanıcıları kaydet
 function saveUsers(users) {
   localStorage.setItem('medisync_users', JSON.stringify(users));
 }
 
-// Aktif oturumu getir
 function getSession() {
   return JSON.parse(localStorage.getItem('medisync_session') || 'null');
 }
 
-// Oturumu kaydet
 function saveSession(user) {
   localStorage.setItem('medisync_session', JSON.stringify(user));
 }
 
-// Oturumu sil (çıkış yap)
 function clearSession() {
   localStorage.removeItem('medisync_session');
 }
 
-// Kayıt ol
-function register(ad, email, sifre) {
+function register(ad, email, sifre, rol) {
   var users = getUsers();
-  // E-posta zaten kayıtlı mı?
   if (users.find(function(u) { return u.email === email; })) {
     return { basarili: false, mesaj: 'Bu e-posta adresi zaten kayıtlı.' };
   }
-  var yeniKullanici = { id: Date.now(), ad: ad, email: email, sifre: sifre, kayitTarihi: new Date().toLocaleDateString('tr-TR') };
-  users.push(yeniKullanici);
+  var yeni = {
+    id: Date.now(),
+    ad: ad,
+    email: email,
+    sifre: sifre,
+    rol: rol || 'musteri',
+    kayitTarihi: new Date().toLocaleDateString('tr-TR')
+  };
+  users.push(yeni);
   saveUsers(users);
-  saveSession(yeniKullanici);
-  return { basarili: true, kullanici: yeniKullanici };
+  saveSession(yeni);
+  return { basarili: true, kullanici: yeni };
 }
 
-// Giriş yap
 function login(email, sifre) {
   var users = getUsers();
-  var kullanici = users.find(function(u) { return u.email === email && u.sifre === sifre; });
+  var kullanici = users.find(function(u) {
+    return u.email === email && u.sifre === sifre;
+  });
   if (!kullanici) {
     return { basarili: false, mesaj: 'E-posta veya şifre hatalı.' };
   }
@@ -53,35 +54,30 @@ function login(email, sifre) {
 }
 
 // ========================================
-// NAVBAR GÜNCELLE
+// NAVBAR
 // ========================================
 function navbarGuncelle() {
   var session = getSession();
   var navBtns = document.querySelector('.nav-btns');
   if (!navBtns) return;
-
   if (session) {
-    // Giriş yapılmış → kullanıcı adı + çıkış butonu göster
     navBtns.innerHTML =
       '<span style="font-size:14px;color:#555;margin-right:8px;">Merhaba, <strong>' + session.ad.split(' ')[0] + '</strong> 👋</span>' +
       '<button class="btn-ghost" onclick="cikisYap()">Çıkış Yap</button>';
   } else {
-    // Giriş yapılmamış → normal butonlar
     navBtns.innerHTML =
       '<button class="btn-ghost" onclick="openModal(\'giris\')">Giriş Yap</button>' +
       '<button class="btn-primary" onclick="openModal(\'kayit\')">Ücretsiz Başla</button>';
   }
 }
 
-// Çıkış yap
 window.cikisYap = function() {
   clearSession();
-  navbarGuncelle();
-  showToast('Başarıyla çıkış yapıldı. Görüşürüz! 👋', 'bilgi');
+  window.location.href = 'index.html';
 };
 
 // ========================================
-// TOAST BİLDİRİM
+// TOAST
 // ========================================
 function showToast(mesaj, tip) {
   var renk = tip === 'basari' ? '#22c55e' : tip === 'hata' ? '#ef4444' : '#5c3db0';
@@ -100,10 +96,8 @@ window.openModal = function(panel) {
   var overlay = document.getElementById('modalOverlay');
   if (!overlay) return;
   overlay.style.display = 'flex';
-  switchPanel(panel);
+  window.switchPanel(panel);
   document.body.style.overflow = 'hidden';
-  // Form hatalarını temizle
-  document.querySelectorAll('.form-error').forEach(function(el) { el.textContent = ''; });
 };
 
 window.closeModal = function() {
@@ -123,23 +117,10 @@ window.switchPanel = function(panel) {
 // ========================================
 // SAYFA YÜKLENINCE
 // ========================================
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
 
-  // Navbar güncelle
   navbarGuncelle();
 
-  // Giriş yapılmışsa modal butonlarını güncelle
-  var session = getSession();
-  if (session) {
-    // CTA butonlarının metnini güncelle
-    document.querySelectorAll('[onclick*="openModal"]').forEach(function(el) {
-      if (el.tagName === 'BUTTON' && el.textContent.includes('Ücretsiz')) {
-        el.textContent = 'Panele Git';
-      }
-    });
-  }
-
-  // Modal overlay tıklama
   var overlay = document.getElementById('modalOverlay');
   if (overlay) {
     overlay.addEventListener('click', function(e) {
@@ -147,24 +128,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ESC ile kapat
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeModal();
   });
 
-  // ——— GİRİŞ FORMU SUBMIT ———
+  // MÜŞTERİ GİRİŞ BUTONU
   var girisBtn = document.getElementById('girisBtn');
   if (girisBtn) {
     girisBtn.addEventListener('click', function() {
       var email = document.getElementById('girisEmail').value.trim();
       var sifre = document.getElementById('girisSifre').value.trim();
       var hata = document.getElementById('girisHata');
-
-      if (!email || !sifre) {
-        hata.textContent = 'Lütfen tüm alanları doldurun.';
-        return;
-      }
-
+      if (!email || !sifre) { hata.textContent = 'Lütfen tüm alanları doldurun.'; return; }
       var sonuc = login(email, sifre);
       if (sonuc.basarili) {
         closeModal();
@@ -176,29 +151,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ——— KAYIT FORMU SUBMIT ———
+  // MÜŞTERİ KAYIT BUTONU
   var kayitBtn = document.getElementById('kayitBtn');
   if (kayitBtn) {
     kayitBtn.addEventListener('click', function() {
-      var ad    = document.getElementById('kayitAd').value.trim();
+      var ad = document.getElementById('kayitAd').value.trim();
       var email = document.getElementById('kayitEmail').value.trim();
       var sifre = document.getElementById('kayitSifre').value.trim();
-      var hata  = document.getElementById('kayitHata');
-
-      if (!ad || !email || !sifre) {
-        hata.textContent = 'Lütfen tüm alanları doldurun.';
-        return;
-      }
-      if (sifre.length < 6) {
-        hata.textContent = 'Şifre en az 6 karakter olmalıdır.';
-        return;
-      }
-      if (!email.includes('@')) {
-        hata.textContent = 'Geçerli bir e-posta adresi girin.';
-        return;
-      }
-
-      var sonuc = register(ad, email, sifre);
+      var hata = document.getElementById('kayitHata');
+      if (!ad || !email || !sifre) { hata.textContent = 'Lütfen tüm alanları doldurun.'; return; }
+      if (sifre.length < 6) { hata.textContent = 'Şifre en az 6 karakter olmalıdır.'; return; }
+      if (!email.includes('@')) { hata.textContent = 'Geçerli bir e-posta adresi girin.'; return; }
+      var sonuc = register(ad, email, sifre, 'musteri');
       if (sonuc.basarili) {
         closeModal();
         navbarGuncelle();
@@ -209,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ——— SEKTÖR ETİKETLERİ ———
+  // SEKTÖR ETİKETLERİ
   document.querySelectorAll('.sector-tag').forEach(function(tag) {
     tag.addEventListener('click', function() {
       document.querySelectorAll('.sector-tag').forEach(function(t) { t.classList.remove('active'); });
@@ -217,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // ——— SSS ACCORDION ———
+  // SSS ACCORDION
   document.querySelectorAll('.faq-question').forEach(function(q) {
     q.addEventListener('click', function() {
       var item = q.parentElement;
@@ -227,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // ——— BUTON SES EFEKTİ ———
+  // BUTON SES EFEKTİ
   function playClick() {
     try {
       var ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -242,14 +206,13 @@ document.addEventListener('DOMContentLoaded', function () {
       osc.stop(ctx.currentTime + 0.1);
     } catch(e) {}
   }
-
   document.querySelectorAll('button').forEach(function(btn) {
     btn.addEventListener('click', function() {
       if (btn.id !== 'musicBtn') playClick();
     });
   });
 
-  // ——— MÜZİK ÇALAR ———
+  // MÜZİK ÇALAR
   var audioCtx = null, musicSource = null, musicPlaying = false;
   var musicBuf = null, musicStartTime = 0, musicOffset = 0;
 
@@ -276,20 +239,6 @@ document.addEventListener('DOMContentLoaded', function () {
     return buf;
   }
 
-  function playMusicLoop() {
-    var ctx = getAudioCtx();
-    if (!musicBuf) musicBuf = createMusicBuffer(ctx);
-    musicSource = ctx.createBufferSource();
-    musicSource.buffer = musicBuf;
-    musicSource.loop = true;
-    var gain = ctx.createGain();
-    gain.gain.value = 0.5;
-    musicSource.connect(gain);
-    gain.connect(ctx.destination);
-    musicSource.start(0, musicOffset % musicBuf.duration);
-    musicStartTime = ctx.currentTime;
-  }
-
   window.toggleMusic = function() {
     var btn = document.getElementById('musicBtn');
     var wave = document.getElementById('musicWave');
@@ -302,7 +251,17 @@ document.addEventListener('DOMContentLoaded', function () {
       wave.classList.add('paused');
       musicPlaying = false;
     } else {
-      playMusicLoop();
+      var ctx2 = getAudioCtx();
+      if (!musicBuf) musicBuf = createMusicBuffer(ctx2);
+      musicSource = ctx2.createBufferSource();
+      musicSource.buffer = musicBuf;
+      musicSource.loop = true;
+      var gain = ctx2.createGain();
+      gain.gain.value = 0.5;
+      musicSource.connect(gain);
+      gain.connect(ctx2.destination);
+      musicSource.start(0, musicOffset % musicBuf.duration);
+      musicStartTime = ctx2.currentTime;
       btn.textContent = '⏸';
       wave.classList.remove('paused');
       musicPlaying = true;

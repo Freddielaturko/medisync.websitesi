@@ -14,8 +14,10 @@
     <li><a href="index.html" class="active">Ana Sayfa</a></li>
     <li><a href="hakkimizda.html">Hakkımızda</a></li>
     <li><a href="fiyatlar.html">Fiyatlar</a></li>
-    <li><a href="randevu.html">Randevu Al</a></li>
     <li><a href="iletisim.html">İletişim</a></li>
+    <li><a href="randevu.html">Randevu Al</a></li>
+    <li><a href="panel.html">İşletme Hesabı</a></li>
+
   </ul>
   <div class="nav-btns">
     <button class="btn-ghost" onclick="openModal('giris')">Giriş Yap</button>
@@ -23,7 +25,7 @@
   </div>
 </nav>
 
-
+<!-- HERO -->
 <div style="display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:48px;padding:72px 64px;max-width:1200px;margin:0 auto;">
   <div>
     <div style="display:inline-block;background:#EFF0FE;color:#5c3db0;font-size:12px;font-weight:500;border-radius:20px;padding:4px 14px;margin-bottom:20px;">Türkiye'nin randevu platformu</div>
@@ -36,7 +38,7 @@
     <p style="font-size:12px;color:#999;margin-top:12px;">Kredi kartı gerekmez · 2 dakikada kurulum · İstediğiniz zaman iptal</p>
   </div>
 
-
+  <!-- CSS Animasyon -->
   <div style="width:100%;height:420px;background:linear-gradient(135deg,#1a0a3c,#2d1b69,#1a0a3c);border-radius:20px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;">
     <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:40px 40px;"></div>
     <div class="anim-dot" style="width:6px;height:6px;top:15%;left:10%;animation-delay:0s;"></div>
@@ -77,7 +79,7 @@
   </div>
 </div>
 
-
+<!-- STATS -->
 <div class="stats">
   <div class="stat"><div class="stat-num">150K+</div><div class="stat-label">Yönetilen randevu</div></div>
   <div class="stat"><div class="stat-num">2.000+</div><div class="stat-label">Aktif işletme</div></div>
@@ -85,7 +87,7 @@
   <div class="stat"><div class="stat-num">7/24</div><div class="stat-label">Canlı destek</div></div>
 </div>
 
-
+<!-- ÖZELLİKLER -->
 <section class="section" id="ozellikler">
   <div class="section-label">Özellikler</div>
   <div class="section-title">Her şey tek platformda</div>
@@ -100,10 +102,15 @@
   </div>
 </section>
 
+<!-- NASIL ÇALIŞIR -->
 <section class="how">
   <div class="section-label">Nasıl çalışır?</div>
   <div class="section-title">3 adımda başlayın</div>
   <div class="how-grid">
+    <div class="how-img-wrap">
+      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&modestbranding=1" title="Tanıtım" style="width:100%;height:340px;border:none;border-radius:16px;" allowfullscreen></iframe>
+    </div>
+    <div class="how-steps">
       <div class="step"><div class="step-num">1</div><div class="step-text"><h3>Hesap oluşturun</h3><p>2 dakikada ücretsiz hesabınızı açın.</p></div></div>
       <div class="step"><div class="step-num">2</div><div class="step-text"><h3>İşletmenizi kurun</h3><p>Hizmet, personel ve çalışma saatlerinizi ekleyin.</p></div></div>
       <div class="step"><div class="step-num">3</div><div class="step-text"><h3>Randevuları yönetin</h3><p>Müşteriler online randevu alsın, siz işinize odaklanın.</p></div></div>
@@ -111,6 +118,7 @@
   </div>
 </section>
 
+<!-- SEKTÖRLER -->
 <section class="section">
   <div class="section-label">Sektörler</div>
   <div class="section-title">Her sektöre uygun çözüm</div>
@@ -127,6 +135,7 @@
   </div>
 </section>
 
+<!-- GÖRSEL BANT -->
 <div class="showcase">
   <div class="showcase-grid">
     <div class="showcase-img"><img src="https://picsum.photos/seed/clinic2/600/220" alt="Klinik"/></div>
@@ -135,6 +144,7 @@
   </div>
 </div>
 
+<!-- TESTİMONİALLAR -->
 <section class="testimonials">
   <div class="section-label">Kullanıcı görüşleri</div>
   <div class="section-title">Gerçek işletmeler, gerçek sonuçlar</div>
@@ -146,6 +156,7 @@
   </div>
 </section>
 
+<!-- CTA -->
 <section class="cta">
   <img class="cta-bg" src="https://picsum.photos/seed/business/1400/500" alt="Arkaplan"/>
   <div class="cta-content">
@@ -165,12 +176,14 @@
   <div class="footer-bottom">© 2025 MediSync — Tüm hakları saklıdır.</div>
 </footer>
 
+<!-- MÜZİK ÇALAR -->
 <div class="music-player">
   <button class="music-btn" id="musicBtn" onclick="toggleMusic()">▶</button>
   <div class="music-info"><div class="music-title">Hoş Geldiniz</div><div class="music-sub">Arka plan müziği</div></div>
   <div class="music-wave paused" id="musicWave"><span></span><span></span><span></span></div>
 </div>
 
+<!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">×</button>

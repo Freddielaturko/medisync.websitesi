@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediSync — İşletme Paneli</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body { background: #f5f4fa; }
+  .panel-layout { display: grid; grid-template-columns: 240px 1fr; min-height: calc(100vh - 64px); }
+  .sidebar { background: #1a0a3c; padding: 28px 0; position: sticky; top: 64px; height: calc(100vh - 64px); }
+  .sidebar-logo { color: #fff; font-size: 16px; font-weight: 600; padding: 0 24px 24px; border-bottom: 0.5px solid rgba(255,255,255,0.1); margin-bottom: 16px; }
+  .sidebar-logo span { color: #a78bfa; }
+  .sidebar-menu { list-style: none; }
+  .sidebar-menu li a { display: flex; align-items: center; gap: 10px; padding: 12px 24px; color: rgba(255,255,255,0.65); text-decoration: none; font-size: 14px; transition: all 0.15s; }
+  .sidebar-menu li a:hover { background: rgba(255,255,255,0.07); color: #fff; }
+  .sidebar-menu li a.active { background: rgba(167,139,250,0.15); color: #a78bfa; border-right: 3px solid #a78bfa; }
+  .sidebar-bottom { position: absolute; bottom: 24px; left: 0; right: 0; padding: 0 24px; }
+  .sidebar-user { background: rgba(255,255,255,0.07); border-radius: 10px; padding: 12px; }
+  .sidebar-user-name { color: #fff; font-size: 13px; font-weight: 600; }
+  .sidebar-user-role { color: #a78bfa; font-size: 11px; margin-top: 2px; }
+  .btn-cikis { width: 100%; margin-top: 10px; background: none; border: 0.5px solid rgba(255,255,255,0.2); border-radius: 8px; color: rgba(255,255,255,0.6); padding: 8px; font-size: 13px; cursor: pointer; }
+  .btn-cikis:hover { background: rgba(255,255,255,0.07); color: #fff; }
+  .panel-content { padding: 36px; }
+  .panel-header { margin-bottom: 28px; }
+  .panel-header h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+  .panel-header p { font-size: 14px; color: #888; }
+  .stat-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+  .stat-card { background: #fff; border-radius: 14px; padding: 20px; border: 0.5px solid #ececec; }
+  .stat-card-label { font-size: 12px; color: #888; margin-bottom: 8px; font-weight: 500; }
+  .stat-card-value { font-size: 28px; font-weight: 700; }
+  .stat-card-sub { font-size: 12px; color: #22c55e; margin-top: 4px; }
+  .stat-card.mor .stat-card-value { color: #5c3db0; }
+  .stat-card.yesil .stat-card-value { color: #22c55e; }
+  .stat-card.turuncu .stat-card-value { color: #f59e0b; }
+  .stat-card.kirmizi .stat-card-value { color: #ef4444; }
+  .panel-section { display: none; }
+  .panel-section.active { display: block; }
+  .tablo-wrap { background: #fff; border-radius: 14px; border: 0.5px solid #ececec; overflow: hidden; }
+  .tablo-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 0.5px solid #f0f0f0; }
+  .tablo-header h3 { font-size: 16px; font-weight: 600; }
+  .filtre-group { display: flex; gap: 8px; }
+  .filtre-btn { padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; border: 0.5px solid #ddd; background: #fff; color: #555; }
+  .filtre-btn.active { background: #5c3db0; color: #fff; border-color: #5c3db0; }
+  table { width: 100%; border-collapse: collapse; }
+  th { padding: 12px 16px; text-align: left; font-size: 12px; font-weight: 600; color: #888; background: #fafafa; border-bottom: 0.5px solid #f0f0f0; }
+  td { padding: 14px 16px; font-size: 13px; border-bottom: 0.5px solid #f9f9f9; vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fafafe; }
+  .durum-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+  .durum-bekliyor { background: #fef3c7; color: #d97706; }
+  .durum-onaylandi { background: #dcfce7; color: #16a34a; }
+  .durum-iptal { background: #fee2e2; color: #dc2626; }
+  .aksiyon-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+  .btn-onayla { background: #dcfce7; color: #16a34a; border: none; border-radius: 6px; padding: 5px 10px; font-size: 12px; font-weight: 600; cursor: pointer; }
+  .btn-onayla:hover { background: #22c55e; color: #fff; }
+  .btn-red { background: #fee2e2; color: #dc2626; border: none; border-radius: 6px; padding: 5px 10px; font-size: 12px; font-weight: 600; cursor: pointer; }
+  .btn-red:hover { background: #ef4444; color: #fff; }
+  .btn-not { background: #EFF0FE; color: #5c3db0; border: none; border-radius: 6px; padding: 5px 10px; font-size: 12px; font-weight: 600; cursor: pointer; }
+  .btn-not:hover { background: #5c3db0; color: #fff; }
+  .musteri-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .musteri-kart { background: #fff; border-radius: 14px; border: 0.5px solid #ececec; padding: 20px; }
+  .musteri-avatar { width: 44px; height: 44px; background: #EFF0FE; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #5c3db0; font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+  .musteri-ad { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+  .musteri-email { font-size: 12px; color: #888; margin-bottom: 10px; }
+  .musteri-say { font-size: 12px; color: #5c3db0; font-weight: 500; }
+  .not-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 9999; align-items: center; justify-content: center; }
+  .not-modal.open { display: flex; }
+  .not-modal-box { background: #fff; border-radius: 16px; padding: 28px; width: 100%; max-width: 420px; margin: 20px; }
+  .not-modal-box h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; }
+  .not-modal-box textarea { width: 100%; padding: 12px; border: 0.5px solid #ddd; border-radius: 8px; font-size: 14px; font-family: inherit; height: 120px; resize: vertical; outline: none; }
+  .not-modal-box textarea:focus { border-color: #5c3db0; }
+  .not-btns { display: flex; gap: 10px; margin-top: 14px; }
+  .btn-kaydet { flex: 1; background: #5c3db0; color: #fff; border: none; border-radius: 8px; padding: 10px; font-size: 14px; font-weight: 600; cursor: pointer; }
+  .btn-iptal2 { flex: 1; background: none; border: 0.5px solid #ddd; border-radius: 8px; padding: 10px; font-size: 14px; cursor: pointer; color: #555; }
+  .engel { text-align: center; padding: 100px 24px; }
+  @media (max-width: 900px) { .panel-layout { grid-template-columns: 1fr; } .sidebar { display: none; } .stat-cards { grid-template-columns: repeat(2,1fr); } .musteri-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">MediSync</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Ana Sayfa</a></li>
+    <li><a href="panel.html" class="active">İşletme Paneli</a></li>
+  </ul>
+  <div class="nav-btns" id="navBtns"></div>
+</nav>
+
+<!-- ERİŞİM ENGELİ -->
+<div id="erisimEngel" class="engel" style="display:none;">
+  <div style="font-size:56px;margin-bottom:20px;">🏢</div>
+  <h2 style="font-size:24px;font-weight:600;margin-bottom:10px;">İşletme Hesabı Gerekli</h2>
+  <p style="color:#888;font-size:15px;margin-bottom:28px;">Bu panele erişmek için işletme hesabıyla giriş yapmanız gerekmektedir.</p>
+  <button onclick="openModal('giris')" style="background:#5c3db0;color:#fff;border:none;border-radius:10px;padding:13px 32px;font-size:15px;font-weight:600;cursor:pointer;margin-right:12px;">İşletme Girişi</button>
+  <a href="index.html" style="background:none;border:0.5px solid #ccc;border-radius:10px;padding:13px 32px;font-size:15px;color:#333;text-decoration:none;display:inline-block;">Ana Sayfaya Dön</a>
+</div>
+
+<!-- PANEL -->
+<div id="panelAna" style="display:none;">
+  <div class="panel-layout">
+    <div class="sidebar">
+      <div class="sidebar-logo">Medi<span>Sync</span> Panel</div>
+      <ul class="sidebar-menu">
+        <li><a href="#" class="active" onclick="bolumAc('ozet',this);return false;"><span>📊</span> Genel Bakış</a></li>
+        <li><a href="#" onclick="bolumAc('randevular',this);return false;"><span>📅</span> Randevular</a></li>
+        <li><a href="#" onclick="bolumAc('musteriler',this);return false;"><span>👥</span> Müşteriler</a></li>
+      </ul>
+      <div class="sidebar-bottom">
+        <div class="sidebar-user">
+          <div class="sidebar-user-name" id="sidebarAd">—</div>
+          <div class="sidebar-user-role">İşletme Hesabı</div>
+        </div>
+        <button class="btn-cikis" onclick="panelCikis()">Çıkış Yap</button>
+      </div>
+    </div>
+
+    <div class="panel-content">
+
+      <!-- GENEL BAKIŞ -->
+      <div class="panel-section active" id="bolum-ozet">
+        <div class="panel-header"><h1>Genel Bakış</h1><p id="bugunTarih"></p></div>
+        <div class="stat-cards">
+          <div class="stat-card mor"><div class="stat-card-label">Toplam Randevu</div><div class="stat-card-value" id="s1">0</div><div class="stat-card-sub">Tüm zamanlar</div></div>
+          <div class="stat-card yesil"><div class="stat-card-label">Onaylanan</div><div class="stat-card-value" id="s2">0</div><div class="stat-card-sub">Aktif randevu</div></div>
+          <div class="stat-card turuncu"><div class="stat-card-label">Bekleyen</div><div class="stat-card-value" id="s3">0</div><div class="stat-card-sub">Onay bekliyor</div></div>
+          <div class="stat-card kirmizi"><div class="stat-card-label">İptal</div><div class="stat-card-value" id="s4">0</div><div class="stat-card-sub">İptal edilen</div></div>
+        </div>
+        <div class="tablo-wrap">
+          <div class="tablo-header"><h3>Son Randevular</h3></div>
+          <table><thead><tr><th>Müşteri</th><th>Hizmet</th><th>Tarih & Saat</th><th>Durum</th><th>İşlem</th></tr></thead><tbody id="ozetTablo"></tbody></table>
+        </div>
+      </div>
+
+      <!-- RANDEVULAR -->
+      <div class="panel-section" id="bolum-randevular">
+        <div class="panel-header"><h1>Randevular</h1><p>Tüm randevuları yönetin.</p></div>
+        <div class="tablo-wrap">
+          <div class="tablo-header">
+            <h3>Randevu Listesi</h3>
+            <div class="filtre-group">
+              <button class="filtre-btn active" onclick="filtrele('hepsi',this)">Hepsi</button>
+              <button class="filtre-btn" onclick="filtrele('bekliyor',this)">Bekleyen</button>
+              <button class="filtre-btn" onclick="filtrele('onaylandi',this)">Onaylanan</button>
+              <button class="filtre-btn" onclick="filtrele('iptal',this)">İptal</button>
+            </div>
+          </div>
+          <table><thead><tr><th>Müşteri</th><th>Hizmet</th><th>Tarih</th><th>Saat</th><th>Not</th><th>Durum</th><th>İşlem</th></tr></thead><tbody id="randevuTablo"></tbody></table>
+        </div>
+      </div>
+
+      <!-- MÜŞTERİLER -->
+      <div class="panel-section" id="bolum-musteriler">
+        <div class="panel-header"><h1>Müşteriler</h1><p>Kayıtlı müşterilerinizi görün.</p></div>
+        <div class="musteri-grid" id="musteriGrid"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- NOT MODALİ -->
+<div class="not-modal" id="notModal">
+  <div class="not-modal-box">
+    <h3>📝 Randevuya Not Ekle</h3>
+    <textarea id="notInput" placeholder="Not girin..."></textarea>
+    <div class="not-btns">
+      <button class="btn-iptal2" onclick="notKapat()">İptal</button>
+      <button class="btn-kaydet" onclick="notKaydet()">Kaydet</button>
+    </div>
+  </div>
+</div>
+
+<!-- İŞLETME GİRİŞ/KAYIT MODAL — script.js'den BAĞIMSIZ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="modalKapat()">×</button>
+    <div id="panelGiris">
+      <h2>İşletme Girişi 🏢</h2>
+      <p class="modal-sub">İşletme hesabınıza giriş yapın</p>
+      <div class="modal-form">
+        <input id="iGirisEmail" type="email" placeholder="E-posta adresiniz"/>
+        <input id="iGirisSifre" type="password" placeholder="Şifreniz"/>
+        <div id="iGirisHata" style="color:#ef4444;font-size:13px;min-height:18px;"></div>
+        <button onclick="isletmeGiris()" class="modal-submit">Giriş Yap</button>
+      </div>
+      <div class="modal-switch">Hesabınız yok mu? <a onclick="isletmeSwitch('kayit')">İşletme kaydı oluşturun</a></div>
+    </div>
+    <div id="panelKayit" style="display:none;">
+      <h2>İşletme Kaydı 🏢</h2>
+      <p class="modal-sub">Yeni işletme hesabı oluşturun</p>
+      <div class="modal-form">
+        <input id="iKayitAd" type="text" placeholder="İşletme Adı / Yetkili Adı"/>
+        <input id="iKayitEmail" type="email" placeholder="E-posta adresiniz"/>
+        <input id="iKayitSifre" type="password" placeholder="Şifre (min. 6 karakter)"/>
+        <div id="iKayitHata" style="color:#ef4444;font-size:13px;min-height:18px;"></div>
+        <button onclick="isletmeKayit()" class="modal-submit">İşletme Hesabı Oluştur</button>
+      </div>
+      <div class="modal-switch">Zaten hesabınız var mı? <a onclick="isletmeSwitch('giris')">Giriş yapın</a></div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+  var aktifFiltre = 'hepsi';
+  var notHedefId = null;
+
+  document.getElementById('bugunTarih').textContent = new Date().toLocaleDateString('tr-TR', {weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+  // Panel kendi modal fonksiyonlarını kullanır — script.js'inkilerden bağımsız
+  function modalAc(panel) {
+    document.getElementById('modalOverlay').style.display = 'flex';
+    isletmeSwitch(panel);
+    document.body.style.overflow = 'hidden';
+  }
+  function modalKapat() {
+    document.getElementById('modalOverlay').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  function isletmeSwitch(panel) {
+    document.getElementById('panelGiris').style.display = panel === 'giris' ? 'block' : 'none';
+    document.getElementById('panelKayit').style.display = panel === 'kayit' ? 'block' : 'none';
+  }
+
+  // openModal override — panel sayfasında kendi modalını kullan
+  window.openModal = function(panel) { modalAc(panel); };
+  window.closeModal = function() { modalKapat(); };
+
+  // İşletme giriş
+  function isletmeGiris() {
+    var email = document.getElementById('iGirisEmail').value.trim();
+    var sifre = document.getElementById('iGirisSifre').value.trim();
+    var hata = document.getElementById('iGirisHata');
+    if (!email || !sifre) { hata.textContent = 'Lütfen tüm alanları doldurun.'; return; }
+    var users = getUsers();
+    var kullanici = users.find(function(u) { return u.email === email && u.sifre === sifre; });
+    if (!kullanici) { hata.textContent = 'E-posta veya şifre hatalı.'; return; }
+    if (kullanici.rol !== 'isletme') { hata.textContent = 'Bu bir müşteri hesabı. İşletme hesabı ile giriş yapın.'; return; }
+    saveSession(kullanici);
+    modalKapat();
+    panelAc(kullanici);
+  }
+
+  // İşletme kayıt
+  function isletmeKayit() {
+    var ad = document.getElementById('iKayitAd').value.trim();
+    var email = document.getElementById('iKayitEmail').value.trim();
+    var sifre = document.getElementById('iKayitSifre').value.trim();
+    var hata = document.getElementById('iKayitHata');
+    if (!ad || !email || !sifre) { hata.textContent = 'Lütfen tüm alanları doldurun.'; return; }
+    if (sifre.length < 6) { hata.textContent = 'Şifre en az 6 karakter olmalıdır.'; return; }
+    if (!email.includes('@')) { hata.textContent = 'Geçerli bir e-posta girin.'; return; }
+    var users = getUsers();
+    if (users.find(function(u) { return u.email === email; })) { hata.textContent = 'Bu e-posta zaten kayıtlı.'; return; }
+    var yeni = { id: Date.now(), ad: ad, email: email, sifre: sifre, rol: 'isletme', kayitTarihi: new Date().toLocaleDateString('tr-TR') };
+    users.push(yeni);
+    saveUsers(users);
+    saveSession(yeni);
+    modalKapat();
+    panelAc(yeni);
+  }
+
+  // Paneli aç
+  function panelAc(kullanici) {
+    document.getElementById('erisimEngel').style.display = 'none';
+    document.getElementById('panelAna').style.display = 'block';
+    document.getElementById('sidebarAd').textContent = kullanici.ad;
+    // Navbar güncelle
+    var navBtns = document.getElementById('navBtns');
+    if (navBtns) navBtns.innerHTML = '<span style="font-size:14px;color:#555;margin-right:8px;">Merhaba, <strong>' + kullanici.ad.split(' ')[0] + '</strong> 🏢</span><button class="btn-ghost" onclick="panelCikis()">Çıkış Yap</button>';
+    panelYukle();
+  }
+
+  // Çıkış
+  function panelCikis() {
+    clearSession();
+    window.location.href = 'index.html';
+  }
+
+  // Sayfa yüklenince kontrol
+  document.addEventListener('DOMContentLoaded', function() {
+    var session = getSession();
+    if (session && session.rol === 'isletme') {
+      panelAc(session);
+    } else {
+      document.getElementById('erisimEngel').style.display = 'block';
+      setTimeout(function() { modalAc('giris'); }, 400);
+    }
+
+    // Modal dışına tıklayınca kapat
+    document.getElementById('modalOverlay').addEventListener('click', function(e) {
+      if (e.target === this) modalKapat();
+    });
+  });
+
+  // ========================================
+  // PANEL FONKSİYONLARI
+  // ========================================
+  function panelYukle() {
+    var session = getSession();
+    var tumRandevular = JSON.parse(localStorage.getItem('medisync_randevular') || '[]');
+    tumRandevular = tumRandevular.map(function(r) { if (!r.durum) r.durum = 'bekliyor'; return r; });
+    localStorage.setItem('medisync_randevular', JSON.stringify(tumRandevular));
+    // Sadece bu işletmeye ait randevuları göster
+    var randevular = tumRandevular.filter(function(r) {
+      return !r.isletmeId || String(r.isletmeId) === String(session.id);
+    });
+
+    document.getElementById('s1').textContent = randevular.length;
+    document.getElementById('s2').textContent = randevular.filter(function(r) { return r.durum === 'onaylandi'; }).length;
+    document.getElementById('s3').textContent = randevular.filter(function(r) { return r.durum === 'bekliyor'; }).length;
+    document.getElementById('s4').textContent = randevular.filter(function(r) { return r.durum === 'iptal'; }).length;
+
+    var son5 = randevular.slice().sort(function(a,b){ return b.id-a.id; }).slice(0,5);
+    ozetGoster(son5);
+    randevuTabloGoster(randevular, aktifFiltre);
+    musteriGoster();
+  }
+
+  function badge(d) {
+    if (d==='onaylandi') return '<span class="durum-badge durum-onaylandi">✓ Onaylandı</span>';
+    if (d==='iptal') return '<span class="durum-badge durum-iptal">✕ İptal</span>';
+    return '<span class="durum-badge durum-bekliyor">⏳ Bekliyor</span>';
+  }
+
+  function aksiyonlar(r) {
+    var b = '';
+    if (r.durum==='bekliyor') {
+      b += '<button class="btn-onayla" onclick="durumDegistir('+r.id+',\'onaylandi\')">Onayla</button>';
+      b += '<button class="btn-red" onclick="durumDegistir('+r.id+',\'iptal\')">İptal</button>';
+    } else if (r.durum==='onaylandi') {
+      b += '<button class="btn-red" onclick="durumDegistir('+r.id+',\'iptal\')">İptal</button>';
+    } else {
+      b += '<button class="btn-onayla" onclick="durumDegistir('+r.id+',\'bekliyor\')">Geri Al</button>';
+    }
+    b += '<button class="btn-not" onclick="notAc('+r.id+')">Not</button>';
+    return b;
+  }
+
+  function ozetGoster(list) {
+    var t = document.getElementById('ozetTablo');
+    if (!list.length) { t.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:32px;color:#bbb;">Henüz randevu yok</td></tr>'; return; }
+    t.innerHTML = list.map(function(r) {
+      return '<tr><td><strong>'+r.ad+'</strong></td><td>'+(r.isletmeAd||'—')+'<br><small style="color:#aaa">'+r.hizmet+'</small></td><td>'+r.tarih+' '+r.saat+'</td><td>'+badge(r.durum)+'</td><td><div class="aksiyon-btns">'+aksiyonlar(r)+'</div></td></tr>';
+    }).join('');
+  }
+
+  function randevuTabloGoster(randevular, filtre) {
+    var list = filtre==='hepsi' ? randevular : randevular.filter(function(r){return r.durum===filtre;});
+    list = list.slice().sort(function(a,b){return a.tarih.localeCompare(b.tarih)||a.saat.localeCompare(b.saat);});
+    var t = document.getElementById('randevuTablo');
+    if (!list.length) { t.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:32px;color:#bbb;">Bu filtrede randevu yok</td></tr>'; return; }
+    t.innerHTML = list.map(function(r) {
+      return '<tr><td><strong>'+r.ad+'</strong></td><td>'+r.hizmet+'</td><td>'+r.tarih+'</td><td>'+r.saat+'</td><td style="max-width:140px;color:#888;">'+(r.panelNot||r.not||'—')+'</td><td>'+badge(r.durum)+'</td><td><div class="aksiyon-btns">'+aksiyonlar(r)+'</div></td></tr>';
+    }).join('');
+  }
+
+  function musteriGoster() {
+    var users = getUsers().filter(function(u){return u.rol!=='isletme';});
+    var randevular = JSON.parse(localStorage.getItem('medisync_randevular')||'[]');
+    var el = document.getElementById('musteriGrid');
+    if (!users.length) { el.innerHTML = '<div style="text-align:center;padding:60px;color:#bbb;grid-column:1/-1;"><div style="font-size:40px;margin-bottom:12px;">👥</div>Henüz kayıtlı müşteri yok</div>'; return; }
+    el.innerHTML = users.map(function(u) {
+      var say = randevular.filter(function(r){return r.ad===u.ad;}).length;
+      return '<div class="musteri-kart"><div class="musteri-avatar">'+u.ad.charAt(0).toUpperCase()+'</div><div class="musteri-ad">'+u.ad+'</div><div class="musteri-email">'+u.email+'</div><div class="musteri-say">📅 '+say+' randevu · Kayıt: '+(u.kayitTarihi||'—')+'</div></div>';
+    }).join('');
+  }
+
+  function durumDegistir(id, yeniDurum) {
+    var randevular = JSON.parse(localStorage.getItem('medisync_randevular')||'[]');
+    randevular = randevular.map(function(r){if(r.id===id)r.durum=yeniDurum;return r;});
+    localStorage.setItem('medisync_randevular', JSON.stringify(randevular));
+    panelYukle();
+    var msg = yeniDurum==='onaylandi' ? 'Randevu onaylandı! ✓' : yeniDurum==='iptal' ? 'Randevu iptal edildi.' : 'Randevu beklemeye alındı.';
+    showToast(msg, yeniDurum==='onaylandi' ? 'basari' : 'bilgi');
+  }
+
+  function notAc(id) {
+    notHedefId = id;
+    var r = JSON.parse(localStorage.getItem('medisync_randevular')||'[]').find(function(r){return r.id===id;});
+    document.getElementById('notInput').value = r ? (r.panelNot||'') : '';
+    document.getElementById('notModal').classList.add('open');
+  }
+  function notKapat() { document.getElementById('notModal').classList.remove('open'); notHedefId = null; }
+  function notKaydet() {
+    if (!notHedefId) return;
+    var randevular = JSON.parse(localStorage.getItem('medisync_randevular')||'[]');
+    randevular = randevular.map(function(r){if(r.id===notHedefId)r.panelNot=document.getElementById('notInput').value.trim();return r;});
+    localStorage.setItem('medisync_randevular', JSON.stringify(randevular));
+    notKapat();
+    panelYukle();
+    showToast('Not kaydedildi! 📝', 'basari');
+  }
+
+  function filtrele(filtre, btn) {
+    aktifFiltre = filtre;
+    document.querySelectorAll('.filtre-btn').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    var randevular = JSON.parse(localStorage.getItem('medisync_randevular')||'[]');
+    randevuTabloGoster(randevular, filtre);
+  }
+
+  function bolumAc(bolum, link) {
+    document.querySelectorAll('.panel-section').forEach(function(s){s.classList.remove('active');});
+    document.querySelectorAll('.sidebar-menu a').forEach(function(a){a.classList.remove('active');});
+    document.getElementById('bolum-'+bolum).classList.add('active');
+    link.classList.add('active');
+  }
+</script>
+</body>
+</html>

@@ -23,38 +23,45 @@
   </div>
 </nav>
 
+<!-- SAYFA BAŞLIĞI -->
 <div class="page-hero">
   <h1>İletişim</h1>
   <p>Sorularınız için bize ulaşın. Ekibimiz en kısa sürede size dönecektir.</p>
 </div>
 
+<!-- İLETİŞİM FORMU -->
 <section class="section contact-section">
   <div class="section-label">Bize yazın</div>
   <div class="section-title">Nasıl yardımcı olabiliriz?</div>
   <div class="contact-grid">
+    <!-- FORM -->
     <div>
       <div class="contact-form">
-        <input type="text" placeholder="Adınız Soyadınız"/>
-        <input type="email" placeholder="E-posta adresiniz"/>
-        <input type="text" placeholder="Konu"/>
-        <textarea placeholder="Mesajınızı buraya yazın..."></textarea>
-        <button class="btn-submit">Mesaj Gönder</button>
+        <input id="iAd" type="text" placeholder="Adınız Soyadınız"/>
+        <input id="iEmail" type="email" placeholder="E-posta adresiniz"/>
+        <input id="iKonu" type="text" placeholder="Konu"/>
+        <textarea id="iMesaj" placeholder="Mesajınızı buraya yazın..."></textarea>
+        <div id="iHata" style="color:#ef4444;font-size:13px;min-height:18px;"></div>
+        <button class="btn-submit" onclick="mesajGonder()">Mesaj Gönder</button>
       </div>
+      <!-- GÖNDERİLEN MESAJLAR -->
+      <div id="mesajlar" style="margin-top:28px;"></div>
     </div>
 
+    <!-- İLETİŞİM BİLGİLERİ -->
     <div class="contact-info">
       <div class="contact-info-item">
         <div class="contact-icon">📍</div>
         <div>
           <h4>Adres</h4>
-          <p>Kuşcağız Mahallesi 340. cad 5/8<br>Keçiören / Ankara</p>
+          <p>Levent Mah. Büyükdere Cad. No:123<br>Şişli / İstanbul</p>
         </div>
       </div>
       <div class="contact-info-item">
         <div class="contact-icon">📞</div>
         <div>
           <h4>Telefon</h4>
-          <p>+90 542 122 0614<br>Pazartesi–Cuma, 09:00–18:00</p>
+          <p>+90 (212) 555 00 00<br>Pazartesi–Cuma, 09:00–18:00</p>
         </div>
       </div>
       <div class="contact-info-item">
@@ -75,10 +82,12 @@
   </div>
 </section>
 
+<!-- HARİTA YERİ (temsili görsel) -->
 <div style="padding: 0 48px 72px;">
   <img src="https://picsum.photos/seed/map/1200/320" alt="Harita" style="width:100%;height:320px;object-fit:cover;border-radius:16px;display:block;"/>
 </div>
 
+<!-- SSS -->
 <section class="faq" style="background:#f8f6ff;">
   <div class="section-label">Sık sorulan sorular</div>
   <div class="section-title">Hızlı cevaplar</div>
@@ -98,6 +107,7 @@
   </div>
 </section>
 
+<!-- CTA -->
 <section class="cta">
   <img class="cta-bg" src="https://picsum.photos/seed/business/1400/500" alt="Arkaplan"/>
   <div class="cta-content">
@@ -110,19 +120,22 @@
 <footer>
   <div class="footer-grid">
     <div class="footer-brand"><a href="index.html" class="logo">MediSync</a><p>Randevu bazlı çalışan tüm işletmelere eksiksiz dijital çözümler sunuyoruz.</p></div>
-    <div class="footer-col"><h4>Sayfalar</h4><ul><li><a href="index.html">Ana Sayfa</a></li><li><a href="hakkimizda.html">Hakkımızda</a></li><li><a href="fiyatlar.html">Fiyatlar</a></li><li><a href="iletisim.html">İletişim</a></li></ul></div>
+    <div class="footer-col"><h4>Sayfalar</h4><ul><li><a href="index.html">Ana Sayfa</a></li><li><a href="hakkimizda.html">Hakkımızda</a></li><li><a href="fiyatlar.html">Fiyatlar</a></li><li><a href="randevu.html">Randevu Al</a></li>
+    <li><a href="iletisim.html">İletişim</a></li></ul></div>
     <div class="footer-col"><h4>Sektörler</h4><ul><li><a href="#">Psikolog</a></li><li><a href="#">Fizyoterapi</a></li><li><a href="#">Güzellik</a></li><li><a href="#">Veteriner</a></li></ul></div>
     <div class="footer-col"><h4>Hesap</h4><ul><li><a href="#" onclick="openModal('giris');return false;">Giriş Yap</a></li><li><a href="#" onclick="openModal('kayit');return false;">Ücretsiz Kaydol</a></li></ul></div>
   </div>
   <div class="footer-bottom">© 2025 MediSync — Tüm hakları saklıdır.</div>
 </footer>
 
+<!-- MÜZİK ÇALAR -->
 <div class="music-player">
   <button class="music-btn" id="musicBtn" onclick="toggleMusic()">▶</button>
   <div class="music-info"><div class="music-title">Hoş Geldiniz</div><div class="music-sub">Arka plan müziği</div></div>
   <div class="music-wave paused" id="musicWave"><span></span><span></span><span></span></div>
 </div>
 
+<!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">×</button>
@@ -151,6 +164,61 @@
     </div>
   </div>
 </div>
+
+<script>
+  function mesajGonder() {
+    var ad = document.getElementById('iAd').value.trim();
+    var email = document.getElementById('iEmail').value.trim();
+    var konu = document.getElementById('iKonu').value.trim();
+    var mesaj = document.getElementById('iMesaj').value.trim();
+    var hata = document.getElementById('iHata');
+
+    if (!ad || !email || !konu || !mesaj) {
+      hata.textContent = 'Lütfen tüm alanları doldurun.';
+      return;
+    }
+    if (!email.includes('@')) {
+      hata.textContent = 'Geçerli bir e-posta adresi girin.';
+      return;
+    }
+    hata.textContent = '';
+
+    var mesajlar = JSON.parse(localStorage.getItem('medisync_mesajlar') || '[]');
+    mesajlar.push({
+      id: Date.now(),
+      ad: ad, email: email, konu: konu, mesaj: mesaj,
+      tarih: new Date().toLocaleDateString('tr-TR'),
+      saat: new Date().toLocaleTimeString('tr-TR', {hour:'2-digit', minute:'2-digit'})
+    });
+    localStorage.setItem('medisync_mesajlar', JSON.stringify(mesajlar));
+
+    document.getElementById('iAd').value = '';
+    document.getElementById('iEmail').value = '';
+    document.getElementById('iKonu').value = '';
+    document.getElementById('iMesaj').value = '';
+
+    mesajlariGoster();
+    showToast('Mesajınız alındı! En kısa sürede dönüş yapacağız. 📩', 'basari');
+  }
+
+  function mesajlariGoster() {
+    var mesajlar = JSON.parse(localStorage.getItem('medisync_mesajlar') || '[]');
+    var el = document.getElementById('mesajlar');
+    if (mesajlar.length === 0) { el.innerHTML = ''; return; }
+    el.innerHTML = '<div style="font-size:14px;font-weight:600;margin-bottom:12px;color:#444;">Gönderilen Mesajlarım</div>' +
+      mesajlar.slice().reverse().map(function(m) {
+        return '<div style="background:#f8f6ff;border:0.5px solid #e0d9f7;border-radius:12px;padding:14px 16px;margin-bottom:10px;">' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">' +
+            '<span style="font-size:13px;font-weight:600;">' + m.konu + '</span>' +
+            '<span style="font-size:11px;color:#aaa;">' + m.tarih + ' ' + m.saat + '</span>' +
+          '</div>' +
+          '<div style="font-size:13px;color:#666;">' + m.mesaj + '</div>' +
+        '</div>';
+      }).join('');
+  }
+
+  document.addEventListener('DOMContentLoaded', mesajlariGoster);
+</script>
 
 <script src="script.js"></script>
 </body>

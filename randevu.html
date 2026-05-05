@@ -6,10 +6,11 @@
 <title>MediSync — Randevu Al</title>
 <link rel="stylesheet" href="style.css">
 <style>
+  body { background: #f5f4fa; }
   .randevu-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 60px 48px; max-width: 1100px; margin: 0 auto; }
-  .randevu-form-box { background: #fff; border: 0.5px solid #ececec; border-radius: 20px; padding: 36px; }
-  .randevu-form-box h2 { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
-  .randevu-form-box p { font-size: 14px; color: #888; margin-bottom: 28px; }
+  .kutu { background: #fff; border: 0.5px solid #ececec; border-radius: 20px; padding: 36px; }
+  .kutu h2 { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+  .kutu > p { font-size: 14px; color: #888; margin-bottom: 28px; }
   .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
   .form-group label { font-size: 13px; font-weight: 600; color: #444; }
   .form-group select, .form-group input { padding: 11px 14px; border: 0.5px solid #ddd; border-radius: 8px; font-size: 14px; font-family: inherit; outline: none; color: #1a1a1a; background: #fff; }
@@ -19,35 +20,32 @@
   .saat-btn:hover { border-color: #5c3db0; color: #5c3db0; background: #f8f6ff; }
   .saat-btn.selected { background: #5c3db0; color: #fff; border-color: #5c3db0; }
   .saat-btn.dolu { background: #f4f4f4; color: #bbb; cursor: not-allowed; border-color: #eee; }
-  .btn-randevu { width: 100%; padding: 13px; background: #5c3db0; color: #fff; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 8px; }
+  .btn-randevu { width: 100%; parodding: 13px; background: #5c3db0; color: #fff; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 8px; }
   .btn-randevu:hover { background: #4a2f95; }
-
-  /* TAKVİM */
-  .takvim-box { background: #fff; border: 0.5px solid #ececec; border-radius: 20px; padding: 36px; }
-  .takvim-box h2 { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
-  .takvim-box p { font-size: 14px; color: #888; margin-bottom: 24px; }
   .takvim-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
   .takvim-ay { font-size: 16px; font-weight: 600; }
   .takvim-nav { background: none; border: 0.5px solid #ddd; border-radius: 8px; width: 32px; height: 32px; cursor: pointer; font-size: 14px; }
   .takvim-nav:hover { border-color: #5c3db0; color: #5c3db0; }
   .takvim-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
   .takvim-gun-baslik { text-align: center; font-size: 11px; font-weight: 600; color: #888; padding: 4px 0; }
-  .takvim-gun { text-align: center; padding: 8px 4px; font-size: 13px; border-radius: 8px; cursor: pointer; position: relative; }
+  .takvim-gun { text-align: center; padding: 8px 4px; font-size: 13px; border-radius: 8px; cursor: pointer; }
   .takvim-gun:hover { background: #f8f6ff; }
   .takvim-gun.bugun { background: #5c3db0; color: #fff; font-weight: 600; }
   .takvim-gun.secili { background: #EFF0FE; color: #5c3db0; font-weight: 600; border: 1.5px solid #5c3db0; }
   .takvim-gun.bos { cursor: default; }
-  .takvim-gun .randevu-nokta { width: 5px; height: 5px; background: #a78bfa; border-radius: 50%; margin: 2px auto 0; }
+  .randevu-nokta { width: 5px; height: 5px; background: #a78bfa; border-radius: 50%; margin: 2px auto 0; }
   .randevu-listesi { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; max-height: 280px; overflow-y: auto; }
   .randevu-kart { background: #f8f6ff; border: 0.5px solid #e0d9f7; border-radius: 12px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; }
-  .randevu-kart-bilgi h4 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
-  .randevu-kart-bilgi p { font-size: 12px; color: #888; }
-  .randevu-sil { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 18px; padding: 0 4px; }
+  .randevu-kart h4 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+  .randevu-kart p { font-size: 12px; color: #888; }
+  .randevu-sil { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 18px; }
+  .r-badge { display:inline-block; padding:2px 10px; border-radius:20px; font-size:11px; font-weight:600; margin-top:5px; }
+  .r-bekliyor { background:#fef3c7; color:#d97706; }
+  .r-onaylandi { background:#dcfce7; color:#16a34a; }
+  .r-iptal { background:#fee2e2; color:#dc2626; }
   .bos-mesaj { text-align: center; color: #bbb; font-size: 13px; padding: 20px 0; }
-
-  @media (max-width: 900px) {
-    .randevu-wrapper { grid-template-columns: 1fr; padding: 40px 20px; }
-  }
+  .giris-engel { text-align: center; padding: 80px 24px; }
+  @media (max-width: 900px) { .randevu-wrapper { grid-template-columns: 1fr; padding: 40px 20px; } }
 </style>
 </head>
 <body>
@@ -61,89 +59,82 @@
     <li><a href="randevu.html" class="active">Randevu Al</a></li>
     <li><a href="iletisim.html">İletişim</a></li>
   </ul>
-  <div class="nav-btns" id="navBtns">
-    <button class="btn-ghost" onclick="openModal('giris')">Giriş Yap</button>
-    <button class="btn-primary" onclick="openModal('kayit')">Ücretsiz Başla</button>
-  </div>
+  <div class="nav-btns" id="navBtns"></div>
 </nav>
 
 <div class="page-hero">
   <h1>Randevu Al</h1>
-  <p>Hizmet seçin, uygun tarihi ve saati belirleyin — randevunuz anında kayıt altına alınsın.</p>
+  <p>Hizmet seçin, tarih ve saat belirleyin — randevunuz anında kaydedilsin.</p>
 </div>
 
-<div class="randevu-wrapper">
+<!-- GİRİŞ GEREKLİ -->
+<div id="girisEngel" class="giris-engel" style="display:none;">
+  <div style="font-size:56px;margin-bottom:20px;">🔒</div>
+  <h2 style="font-size:24px;font-weight:600;margin-bottom:10px;">Randevu almak için giriş yapmalısınız</h2>
+  <p style="color:#888;font-size:15px;margin-bottom:28px;">Hesabınıza giriş yapın veya ücretsiz kayıt olun.</p>
+  <button onclick="openModal('giris')" style="background:#5c3db0;color:#fff;border:none;border-radius:10px;padding:13px 32px;font-size:15px;font-weight:600;cursor:pointer;margin-right:12px;">Giriş Yap</button>
+  <button onclick="openModal('kayit')" style="background:none;border:0.5px solid #ccc;border-radius:10px;padding:13px 32px;font-size:15px;cursor:pointer;color:#333;">Ücretsiz Kaydol</button>
+</div>
 
-  <!-- RANDEVU FORMU -->
-  <div class="randevu-form-box">
-    <h2>Yeni Randevu</h2>
-    <p>Aşağıdaki alanları doldurarak randevunuzu oluşturun.</p>
-
-    <div class="form-group">
-      <label>Ad Soyad</label>
-      <input type="text" id="rAd" placeholder="Adınız Soyadınız" />
-    </div>
-    <div class="form-group">
-      <label>Hizmet Seçin</label>
-      <select id="rHizmet">
-        <option value="">— Hizmet seçin —</option>
-        <option>Fizyoterapi</option>
-        <option>Psikolojik Danışmanlık</option>
-        <option>Diş Muayenesi</option>
-        <option>Diyetisyen</option>
-        <option>Pilates</option>
-        <option>Veteriner</option>
-        <option>Güzellik & Bakım</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Tarih Seçin</label>
-      <input type="date" id="rTarih" />
-    </div>
-    <div class="form-group">
-      <label>Saat Seçin</label>
-      <div class="saat-grid" id="saatGrid">
-        <div class="saat-btn" onclick="saatSec(this)">09:00</div>
-        <div class="saat-btn" onclick="saatSec(this)">09:30</div>
-        <div class="saat-btn" onclick="saatSec(this)">10:00</div>
-        <div class="saat-btn" onclick="saatSec(this)">10:30</div>
-        <div class="saat-btn" onclick="saatSec(this)">11:00</div>
-        <div class="saat-btn" onclick="saatSec(this)">11:30</div>
-        <div class="saat-btn" onclick="saatSec(this)">13:00</div>
-        <div class="saat-btn" onclick="saatSec(this)">13:30</div>
-        <div class="saat-btn" onclick="saatSec(this)">14:00</div>
-        <div class="saat-btn" onclick="saatSec(this)">14:30</div>
-        <div class="saat-btn" onclick="saatSec(this)">15:00</div>
-        <div class="saat-btn" onclick="saatSec(this)">15:30</div>
-        <div class="saat-btn" onclick="saatSec(this)">16:00</div>
-        <div class="saat-btn" onclick="saatSec(this)">16:30</div>
-        <div class="saat-btn" onclick="saatSec(this)">17:00</div>
-        <div class="saat-btn" onclick="saatSec(this)">17:30</div>
+<!-- RANDEVU İÇERİK -->
+<div id="randevuIcerik" style="display:none;">
+  <div class="randevu-wrapper">
+    <div class="kutu">
+      <h2>Yeni Randevu</h2>
+      <p>Aşağıdaki alanları doldurarak randevunuzu oluşturun.</p>
+      <div class="form-group"><label>Ad Soyad</label><input type="text" id="rAd" placeholder="Adınız Soyadınız"/></div>
+      <div class="form-group">
+        <label>İşletme Seçin</label>
+        <select id="rIsletme" onchange="isletmeSecildi()">
+          <option value="">— İşletme seçin —</option>
+        </select>
       </div>
+      <div class="form-group">
+        <label>Hizmet Seçin</label>
+        <select id="rHizmet">
+          <option value="">— Önce işletme seçin —</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Tarih Seçin</label><input type="date" id="rTarih"/></div>
+      <div class="form-group">
+        <label>Saat Seçin</label>
+        <div class="saat-grid" id="saatGrid">
+          <div class="saat-btn" onclick="saatSec(this)">09:00</div>
+          <div class="saat-btn" onclick="saatSec(this)">09:30</div>
+          <div class="saat-btn" onclick="saatSec(this)">10:00</div>
+          <div class="saat-btn" onclick="saatSec(this)">10:30</div>
+          <div class="saat-btn" onclick="saatSec(this)">11:00</div>
+          <div class="saat-btn" onclick="saatSec(this)">11:30</div>
+          <div class="saat-btn" onclick="saatSec(this)">13:00</div>
+          <div class="saat-btn" onclick="saatSec(this)">13:30</div>
+          <div class="saat-btn" onclick="saatSec(this)">14:00</div>
+          <div class="saat-btn" onclick="saatSec(this)">14:30</div>
+          <div class="saat-btn" onclick="saatSec(this)">15:00</div>
+          <div class="saat-btn" onclick="saatSec(this)">15:30</div>
+          <div class="saat-btn" onclick="saatSec(this)">16:00</div>
+          <div class="saat-btn" onclick="saatSec(this)">16:30</div>
+          <div class="saat-btn" onclick="saatSec(this)">17:00</div>
+          <div class="saat-btn" onclick="saatSec(this)">17:30</div>
+        </div>
+      </div>
+      <div class="form-group"><label>Not (opsiyonel)</label><input type="text" id="rNot" placeholder="Eklemek istediğiniz bir not..."/></div>
+      <div id="rHata" style="color:#ef4444;font-size:13px;min-height:18px;margin-bottom:8px;"></div>
+      <button class="btn-randevu" onclick="randevuKaydet()">Randevu Oluştur</button>
     </div>
-    <div class="form-group">
-      <label>Not (opsiyonel)</label>
-      <input type="text" id="rNot" placeholder="Eklemek istediğiniz bir not..." />
-    </div>
-    <div id="rHata" style="color:#ef4444;font-size:13px;min-height:18px;margin-bottom:8px;"></div>
-    <button class="btn-randevu" onclick="randevuKaydet()">Randevu Oluştur</button>
-  </div>
 
-  <!-- TAKVİM & LİSTE -->
-  <div class="takvim-box">
-    <h2>Randevu Takviminiz</h2>
-    <p>Randevularınızı takvim üzerinden takip edin.</p>
-
-    <div class="takvim-header">
-      <button class="takvim-nav" onclick="takvimGeriAl()">‹</button>
-      <div class="takvim-ay" id="takvimAyYil"></div>
-      <button class="takvim-nav" onclick="takvimIleriAl()">›</button>
-    </div>
-    <div class="takvim-grid" id="takvimGrid"></div>
-
-    <div style="margin-top:24px;">
-      <div style="font-size:14px;font-weight:600;margin-bottom:12px;" id="randevuListeBaslik">Tüm Randevularım</div>
-      <div class="randevu-listesi" id="randevuListesi"></div>
+    <div class="kutu">
+      <h2>Randevu Takviminiz</h2>
+      <p>Randevularınızı takvim üzerinden takip edin.</p>
+      <div class="takvim-header">
+        <button class="takvim-nav" onclick="takvimGeri()">‹</button>
+        <div class="takvim-ay" id="takvimAyYil"></div>
+        <button class="takvim-nav" onclick="takvimIleri()">›</button>
+      </div>
+      <div class="takvim-grid" id="takvimGrid"></div>
+      <div style="margin-top:24px;">
+        <div style="font-size:14px;font-weight:600;margin-bottom:12px;" id="listeBaslik">Tüm Randevularım</div>
+        <div class="randevu-listesi" id="randevuListesi"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -176,7 +167,7 @@
       <div class="modal-form">
         <input id="kayitAd" type="text" placeholder="Adınız Soyadınız"/>
         <input id="kayitEmail" type="email" placeholder="E-posta adresiniz"/>
-        <input id="kayitSifre" type="password" placeholder="Şifre oluşturun (min. 6 karakter)"/>
+        <input id="kayitSifre" type="password" placeholder="Şifre (min. 6 karakter)"/>
         <div id="kayitHata" style="color:#ef4444;font-size:13px;min-height:18px;"></div>
         <button id="kayitBtn" class="modal-submit">Hesap Oluştur</button>
       </div>
@@ -187,62 +178,44 @@
 
 <script src="script.js"></script>
 <script>
-  // ——— GİRİŞ KONTROLÜ ———
-  // Sayfa yüklenince oturum kontrolü yap
+  var secilenSaat = '';
+  var takvimYil, takvimAy;
+
   document.addEventListener('DOMContentLoaded', function() {
     var session = getSession();
     if (!session) {
-      // Giriş yapılmamış → içeriği gizle, uyarı göster ve modal aç
-      document.querySelector('.randevu-wrapper').style.display = 'none';
-      var uyari = document.createElement('div');
-      uyari.id = 'girisUyari';
-      uyari.style.cssText = 'text-align:center;padding:80px 24px;';
-      uyari.innerHTML =
-        '<div style="font-size:56px;margin-bottom:20px;">🔒</div>' +
-        '<h2 style="font-size:24px;font-weight:600;margin-bottom:10px;">Bu sayfaya erişmek için giriş yapmalısınız</h2>' +
-        '<p style="color:#888;font-size:15px;margin-bottom:28px;">Randevu oluşturmak ve takviminizi görmek için hesabınıza giriş yapın.</p>' +
-        '<button onclick="openModal(\'giris\')" style="background:#5c3db0;color:#fff;border:none;border-radius:10px;padding:13px 32px;font-size:15px;font-weight:600;cursor:pointer;margin-right:12px;">Giriş Yap</button>' +
-        '<button onclick="openModal(\'kayit\')" style="background:none;border:0.5px solid #ccc;border-radius:10px;padding:13px 32px;font-size:15px;cursor:pointer;color:#333;">Ücretsiz Kaydol</button>';
-      document.querySelector('.page-hero').insertAdjacentElement('afterend', uyari);
-      // Modal'ı otomatik aç
+      document.getElementById('girisEngel').style.display = 'block';
       setTimeout(function() { openModal('giris'); }, 400);
     } else {
-      // Giriş yapılmış → formdaki ad alanını kullanıcı adıyla doldur
-      var adInput = document.getElementById('rAd');
-      if (adInput && !adInput.value) adInput.value = session.ad;
+      document.getElementById('randevuIcerik').style.display = 'block';
+      document.getElementById('rAd').value = session.ad;
+      var bugun = new Date();
+      document.getElementById('rTarih').min = bugun.toISOString().split('T')[0];
+      isletmeleriYukle();
+      takvimBaslat();
+      randevuListesiGoster();
+      // Her 10 saniyede bir durumu kontrol et — işletme onaylayınca bildirim gelsin
+      setInterval(function() {
+        randevuListesiGoster();
+        takvimCiz();
+      }, 10000);
     }
-  });
 
-  // Giriş yapılınca sayfayı yenile (script.js'deki navbarGuncelle'yi override et)
-  var _eskiNavbar = window.navbarGuncelle;
-  document.addEventListener('DOMContentLoaded', function() {
-    // Giriş başarılı olunca sayfayı yenile
+    // Giriş sonrası sayfayı yenile
     var girisBtn = document.getElementById('girisBtn');
     var kayitBtn = document.getElementById('kayitBtn');
     if (girisBtn) {
       girisBtn.addEventListener('click', function() {
-        setTimeout(function() {
-          if (getSession()) { location.reload(); }
-        }, 100);
+        setTimeout(function() { if (getSession()) location.reload(); }, 200);
       });
     }
     if (kayitBtn) {
       kayitBtn.addEventListener('click', function() {
-        setTimeout(function() {
-          if (getSession()) { location.reload(); }
-        }, 100);
+        setTimeout(function() { if (getSession()) location.reload(); }, 200);
       });
     }
   });
 
-  var secilenSaat = '';
-  var takvimYil, takvimAy;
-
-  // Bugünün tarihini min olarak ayarla
-  var bugun = new Date();
-  document.getElementById('rTarih').min = bugun.toISOString().split('T')[0];
-
-  // Saat seçimi
   function saatSec(el) {
     if (el.classList.contains('dolu')) return;
     document.querySelectorAll('.saat-btn').forEach(function(b) { b.classList.remove('selected'); });
@@ -250,171 +223,167 @@
     secilenSaat = el.textContent;
   }
 
-  // Randevuları getir
-  function getRandevular() {
-    return JSON.parse(localStorage.getItem('medisync_randevular') || '[]');
-  }
-  function saveRandevular(list) {
-    localStorage.setItem('medisync_randevular', JSON.stringify(list));
+  // İşletmeleri yükle
+  function isletmeleriYukle() {
+    var users = getUsers().filter(function(u) { return u.rol === 'isletme'; });
+    var sel = document.getElementById('rIsletme');
+    if (!sel) return;
+    sel.innerHTML = '<option value="">— İşletme seçin —</option>';
+    users.forEach(function(u) {
+      var opt = document.createElement('option');
+      opt.value = u.id;
+      opt.textContent = u.ad;
+      sel.appendChild(opt);
+    });
+    if (!users.length) {
+      sel.innerHTML = '<option value="">Kayıtlı işletme bulunamadı</option>';
+    }
   }
 
-  // Dolu saatleri işaretle
-  function doluSaatleriGoster() {
-    var tarih = document.getElementById('rTarih').value;
-    if (!tarih) return;
-    var randevular = getRandevular();
-    var bugunRandevular = randevular.filter(function(r) { return r.tarih === tarih; });
-    var doluSaatler = bugunRandevular.map(function(r) { return r.saat; });
-    document.querySelectorAll('.saat-btn').forEach(function(btn) {
-      if (doluSaatler.includes(btn.textContent)) {
-        btn.classList.add('dolu');
-        btn.classList.remove('selected');
-      } else {
-        btn.classList.remove('dolu');
-      }
+  var HIZMETLer = ['Fizyoterapi','Psikolojik Danışmanlık','Diş Muayenesi','Diyetisyen','Pilates','Veteriner','Güzellik & Bakım','Masaj & Spa','Kuaför'];
+
+  function isletmeSecildi() {
+    var hizmetSel = document.getElementById('rHizmet');
+    var isletmeId = document.getElementById('rIsletme').value;
+    if (!isletmeId) {
+      hizmetSel.innerHTML = '<option value="">— Önce işletme seçin —</option>';
+      return;
+    }
+    hizmetSel.innerHTML = '<option value="">— Hizmet seçin —</option>';
+    HIZMETLer.forEach(function(h) {
+      var opt = document.createElement('option');
+      opt.value = h; opt.textContent = h;
+      hizmetSel.appendChild(opt);
     });
   }
 
-  document.getElementById('rTarih').addEventListener('change', doluSaatleriGoster);
+  function getRandevular() { return JSON.parse(localStorage.getItem('medisync_randevular') || '[]'); }
+  function saveRandevular(list) { localStorage.setItem('medisync_randevular', JSON.stringify(list)); }
 
-  // Randevu kaydet
+  function doluSaatleriGoster() {
+    var tarih = document.getElementById('rTarih').value;
+    if (!tarih) return;
+    var dolu = getRandevular().filter(function(r) { return r.tarih === tarih; }).map(function(r) { return r.saat; });
+    document.querySelectorAll('.saat-btn').forEach(function(btn) {
+      btn.classList.toggle('dolu', dolu.includes(btn.textContent));
+      if (dolu.includes(btn.textContent)) btn.classList.remove('selected');
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var tarihInput = document.getElementById('rTarih');
+    if (tarihInput) tarihInput.addEventListener('change', doluSaatleriGoster);
+  });
+
   function randevuKaydet() {
     var ad = document.getElementById('rAd').value.trim();
     var hizmet = document.getElementById('rHizmet').value;
     var tarih = document.getElementById('rTarih').value;
     var not = document.getElementById('rNot').value.trim();
     var hataEl = document.getElementById('rHata');
-
     if (!ad) { hataEl.textContent = 'Lütfen adınızı girin.'; return; }
     if (!hizmet) { hataEl.textContent = 'Lütfen bir hizmet seçin.'; return; }
     if (!tarih) { hataEl.textContent = 'Lütfen bir tarih seçin.'; return; }
     if (!secilenSaat) { hataEl.textContent = 'Lütfen bir saat seçin.'; return; }
     hataEl.textContent = '';
-
-    var randevular = getRandevular();
-    var yeni = {
-      id: Date.now(),
-      ad: ad,
-      hizmet: hizmet,
-      tarih: tarih,
-      saat: secilenSaat,
-      not: not,
-      olusturulma: new Date().toLocaleDateString('tr-TR')
-    };
-    randevular.push(yeni);
-    saveRandevular(randevular);
-
-    // Formu temizle
-    document.getElementById('rAd').value = '';
+    var list = getRandevular();
+    list.push({ id: Date.now(), ad: ad, hizmet: hizmet, tarih: tarih, saat: secilenSaat, not: not, durum: 'bekliyor' });
+    saveRandevular(list);
     document.getElementById('rHizmet').value = '';
     document.getElementById('rTarih').value = '';
     document.getElementById('rNot').value = '';
     secilenSaat = '';
     document.querySelectorAll('.saat-btn').forEach(function(b) { b.classList.remove('selected', 'dolu'); });
-
     takvimCiz();
     randevuListesiGoster();
-    showToast('Randevunuz başarıyla oluşturuldu! 🎉', 'basari');
+    showToast('Randevunuz oluşturuldu! 🎉', 'basari');
   }
 
-  // Randevu sil
   function randevuSil(id) {
-    var randevular = getRandevular().filter(function(r) { return r.id !== id; });
-    saveRandevular(randevular);
+    saveRandevular(getRandevular().filter(function(r) { return r.id !== id; }));
     takvimCiz();
     randevuListesiGoster();
     showToast('Randevu iptal edildi.', 'bilgi');
   }
 
-  // Randevu listesini göster
-  function randevuListesiGoster(tarihFiltre) {
-    var randevular = getRandevular();
-    if (tarihFiltre) {
-      randevular = randevular.filter(function(r) { return r.tarih === tarihFiltre; });
-      document.getElementById('randevuListeBaslik').textContent = tarihFiltre + ' — Randevular';
+  function durumBadge(durum) {
+    if (durum === 'onaylandi') return '<div class="r-badge r-onaylandi">✓ Onaylandı</div>';
+    if (durum === 'iptal') return '<div class="r-badge r-iptal">✕ İptal Edildi</div>';
+    return '<div class="r-badge r-bekliyor">⏳ Onay Bekleniyor</div>';
+  }
+
+  // Önceki durumları hafızaya al — değişince bildirim göster
+  var oncekiDurumlar = {};
+
+  function durumBildirimKontrol(list) {
+    list.forEach(function(r) {
+      var onceki = oncekiDurumlar[r.id];
+      if (onceki && onceki !== r.durum) {
+        if (r.durum === 'onaylandi') {
+          showToast('🎉 ' + r.hizmet + ' randevunuz onaylandı! (' + r.tarih + ' ' + r.saat + ')', 'basari');
+        } else if (r.durum === 'iptal') {
+          showToast('❌ ' + r.hizmet + ' randevunuz iptal edildi. (' + r.tarih + ' ' + r.saat + ')', 'hata');
+        }
+      }
+      oncekiDurumlar[r.id] = r.durum;
+    });
+  }
+
+  function randevuListesiGoster(filtre) {
+    var list = getRandevular();
+    // Sadece bu müşterinin randevularını göster
+    var session = getSession();
+    if (session) {
+      list = list.filter(function(r) { return r.ad === session.ad; });
+    }
+    durumBildirimKontrol(list);
+    if (filtre) {
+      var filtrelenmis = list.filter(function(r) { return r.tarih === filtre; });
+      document.getElementById('listeBaslik').textContent = filtre + ' Randevuları';
+      list = filtrelenmis;
     } else {
-      document.getElementById('randevuListeBaslik').textContent = 'Tüm Randevularım';
+      document.getElementById('listeBaslik').textContent = 'Tüm Randevularım';
     }
-    randevular.sort(function(a, b) { return a.tarih.localeCompare(b.tarih) || a.saat.localeCompare(b.saat); });
-    var liste = document.getElementById('randevuListesi');
-    if (randevular.length === 0) {
-      liste.innerHTML = '<div class="bos-mesaj">Henüz randevu yok.</div>';
-      return;
-    }
-    liste.innerHTML = randevular.map(function(r) {
-      return '<div class="randevu-kart">' +
-        '<div class="randevu-kart-bilgi">' +
-          '<h4>' + r.hizmet + ' — ' + r.saat + '</h4>' +
-          '<p>' + r.tarih + ' · ' + r.ad + (r.not ? ' · ' + r.not : '') + '</p>' +
-        '</div>' +
-        '<button class="randevu-sil" onclick="randevuSil(' + r.id + ')" title="İptal et">×</button>' +
-      '</div>';
+    list.sort(function(a, b) { return a.tarih.localeCompare(b.tarih) || a.saat.localeCompare(b.saat); });
+    var el = document.getElementById('randevuListesi');
+    if (!list.length) { el.innerHTML = '<div class="bos-mesaj">Henüz randevu yok.</div>'; return; }
+    el.innerHTML = list.map(function(r) {
+      var silBtn = r.durum !== 'onaylandi' ? '<button class="randevu-sil" onclick="randevuSil(' + r.id + ')" title="İptal et">×</button>' : '';
+      return '<div class="randevu-kart"><div><h4>' + r.hizmet + ' — ' + r.saat + (r.isletmeAd ? ' · <span style="color:#5c3db0">' + r.isletmeAd + '</span>' : '') + '</h4><p>' + r.tarih + ' · ' + r.ad + (r.not ? ' · ' + r.not : '') + '</p>' + durumBadge(r.durum || 'bekliyor') + '</div>' + silBtn + '</div>';
     }).join('');
   }
 
-  // TAKVİM
   var AYLAR = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
 
   function takvimBaslat() {
-    var bugun = new Date();
-    takvimYil = bugun.getFullYear();
-    takvimAy = bugun.getMonth();
-    takvimCiz();
+    var b = new Date(); takvimYil = b.getFullYear(); takvimAy = b.getMonth(); takvimCiz();
   }
-
-  function takvimGeriAl() {
-    takvimAy--;
-    if (takvimAy < 0) { takvimAy = 11; takvimYil--; }
-    takvimCiz();
-  }
-  function takvimIleriAl() {
-    takvimAy++;
-    if (takvimAy > 11) { takvimAy = 0; takvimYil++; }
-    takvimCiz();
-  }
+  function takvimGeri() { takvimAy--; if (takvimAy < 0) { takvimAy = 11; takvimYil--; } takvimCiz(); }
+  function takvimIleri() { takvimAy++; if (takvimAy > 11) { takvimAy = 0; takvimYil++; } takvimCiz(); }
 
   function takvimCiz() {
     document.getElementById('takvimAyYil').textContent = AYLAR[takvimAy] + ' ' + takvimYil;
-    var randevular = getRandevular();
-    var randevuTarihleri = randevular.map(function(r) { return r.tarih; });
-
-    var ilkGun = new Date(takvimYil, takvimAy, 1).getDay();
-    ilkGun = (ilkGun + 6) % 7; // Pazartesi başlangıç
-    var sonGun = new Date(takvimYil, takvimAy + 1, 0).getDate();
+    var tarihler = getRandevular().map(function(r) { return r.tarih; });
+    var ilk = (new Date(takvimYil, takvimAy, 1).getDay() + 6) % 7;
+    var son = new Date(takvimYil, takvimAy + 1, 0).getDate();
     var bugun = new Date();
-
-    var html = ['Pt','Sa','Ça','Pe','Cu','Ct','Pz'].map(function(g) {
-      return '<div class="takvim-gun-baslik">' + g + '</div>';
-    }).join('');
-
-    for (var i = 0; i < ilkGun; i++) html += '<div class="takvim-gun bos"></div>';
-
-    for (var g = 1; g <= sonGun; g++) {
-      var tarihStr = takvimYil + '-' +
-        String(takvimAy + 1).padStart(2, '0') + '-' +
-        String(g).padStart(2, '0');
-      var bugunMu = (bugun.getFullYear() === takvimYil && bugun.getMonth() === takvimAy && bugun.getDate() === g);
-      var randevuVarMi = randevuTarihleri.includes(tarihStr);
-      var cls = 'takvim-gun' + (bugunMu ? ' bugun' : '');
-      html += '<div class="' + cls + '" onclick="takvimGunSec(\'' + tarihStr + '\')">' +
-        g + (randevuVarMi ? '<div class="randevu-nokta"></div>' : '') +
-      '</div>';
+    var html = ['Pt','Sa','Ça','Pe','Cu','Ct','Pz'].map(function(g) { return '<div class="takvim-gun-baslik">' + g + '</div>'; }).join('');
+    for (var i = 0; i < ilk; i++) html += '<div class="takvim-gun bos"></div>';
+    for (var g = 1; g <= son; g++) {
+      var t = takvimYil + '-' + String(takvimAy + 1).padStart(2,'0') + '-' + String(g).padStart(2,'0');
+      var bugunMu = bugun.getFullYear() === takvimYil && bugun.getMonth() === takvimAy && bugun.getDate() === g;
+      html += '<div class="takvim-gun' + (bugunMu ? ' bugun' : '') + '" onclick="takvimGunSec(event,\'' + t + '\')">' + g + (tarihler.includes(t) ? '<div class="randevu-nokta"></div>' : '') + '</div>';
     }
     document.getElementById('takvimGrid').innerHTML = html;
-    randevuListesiGoster();
   }
 
-  function takvimGunSec(tarih) {
+  function takvimGunSec(e, tarih) {
     document.querySelectorAll('.takvim-gun').forEach(function(el) { el.classList.remove('secili'); });
-    event.currentTarget.classList.add('secili');
+    e.currentTarget.classList.add('secili');
     randevuListesiGoster(tarih);
-    // Formdaki tarihi de güncelle
     document.getElementById('rTarih').value = tarih;
     doluSaatleriGoster();
   }
-
-  takvimBaslat();
-  randevuListesiGoster();
 </script>
 </body>
 </html>

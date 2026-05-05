@@ -75,3 +75,8 @@ createMusicBuffer() fonksiyonu Do-Re-Mi-Sol notalarını sinüs dalgalarıyla ma
 
 LocalStorage
 localstorage ile sahte veri tabanı kurduk. Veriler tarayıcının kendi hafızasına kaydediliyor. Sunucu geretirmiyor ama veriler sadece o tarayıcıda kalıyor. ( Başlangıç aşaması için uygun olduğu öngörülmüştür.)
+
+GitHub
+Proje githuba yüklendi 
+
+İşletme paneli ve randevu bildirimleri eklendi

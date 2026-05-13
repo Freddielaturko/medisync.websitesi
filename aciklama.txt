@@ -77,6 +77,13 @@ LocalStorage
 localstorage ile sahte veri tabanı kurduk. Veriler tarayıcının kendi hafızasına kaydediliyor. Sunucu geretirmiyor ama veriler sadece o tarayıcıda kalıyor. ( Başlangıç aşaması için uygun olduğu öngörülmüştür.)
 
 GitHub
-Proje githuba yüklendi 
+git add . 
+git commit -m "..."
+git push 
+Komutlarını terminalde çalıştırarak proje githuba yüklendi.
+https://freddielaturko.github.io/medisync.websitesi/index.html
+Bu sayede websitesine bu link üzerinden ulaşılabiliyor.
 
-İşletme paneli ve randevu bildirimleri eklendi
+İşletme paneli ve randevu bildirimleri eklendi.
+Artık işletmeler kendi işletme hesabını olusturup müşterilerin randevularını 
+onaylayıp ya da iptal edebiliyor tüm randevuları görüntüleyebiliyor.
